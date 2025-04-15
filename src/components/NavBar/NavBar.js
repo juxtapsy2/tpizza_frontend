@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Menu } from "lucide-react";
-import logo from "../../assets/logo/logo2.png";
+import logo from "../../assets/logo/logo-remove-bg.png";
 
-export const NavBar = () => {
-  const [cartCount, setCartCount] = useState(2); // Giả sử có 2 sản phẩm trong giỏ hàng
+const NavBar = () => {
+  const [cartCount, ] = useState(2); // Giả sử có 2 sản phẩm trong giỏ hàng
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-red-600 p-4 text-white flex flex-row justify-between items-center min-w-[90%] z-9999">
+    <nav className="bg-white text-green-900 border-none rounded-xl flex flex-row justify-between items-center m-middle mt-3 w-[95%] z-9999">
       {/* Logo */}
-      <div className="flex items-center space-x-2 max-w-[20px]">
-        <img src={logo} alt="Logo" className="aspect-auto" />
-        <span className="text-2xl font-bold">TPizza</span>
+      <div className="flex items-center space-x-2 max-w-[200px]">
+        <img src={logo} alt="TPizza Logo" className="h-[80px] apsect-auto border-none border-r-8" />
       </div>
 
-      {/* Desktop Menu */}
-      <div className="hidden md:flex space-x-6">
+      {/* Navigation Menu */}
+      <div className="hidden md:flex space-x-6 font-semibold">
         <a href="/" className="hover:underline">Trang chủ</a>
         <a href="/menu" className="hover:underline">Menu</a>
         <a href="/deals" className="hover:underline">Khuyến mãi</a>
         <a href="/contact" className="hover:underline">Liên hệ</a>
       </div>
 
-      {/* Giỏ hàng + Đăng nhập */}
+      {/* Cart + Login */}
       <div className="flex items-center space-x-4">
         <a href="/login" className="hover:underline hidden md:block">Đăng nhập</a>
         <div className="relative cursor-pointer">
@@ -41,7 +40,7 @@ export const NavBar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-red-700 p-4 flex flex-col space-y-4 text-center md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-green-900 p-4 flex flex-col space-y-4 text-center md:hidden text-white">
           <a href="/" className="hover:underline">Trang chủ</a>
           <a href="/menu" className="hover:underline">Menu</a>
           <a href="/deals" className="hover:underline">Khuyến mãi</a>
@@ -49,6 +48,8 @@ export const NavBar = () => {
           <a href="/login" className="hover:underline">Đăng nhập</a>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
+
+export default NavBar;
