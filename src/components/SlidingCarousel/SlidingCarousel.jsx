@@ -33,11 +33,11 @@ function PrevArrow(props) {
 
 const slides = [
   {
-    image: event1,
+    image: event2,
     title: "Pizza Party Event",
   },
   {
-    image: event2,
+    image: event1,
     title: "Discount Pizza Night",
   },
   {
@@ -76,9 +76,9 @@ function EventCarousel() {
       },
     ],
     customPaging: () => (
-      <div className="w-2 h-2 mt-2 rounded-full bg-green-950 bg-opacity-60 hover:bg-opacity-100 transition-all duration-300"></div>
+      <div className="w-2 h-2 mt-2 rounded-full transition-all duration-300"></div>
     ),
-    appendDots: (dots) => (
+    appendDots: dots => (
       <div>
         <ul className="flex justify-center gap-0 mt-6">{dots}</ul>
       </div>

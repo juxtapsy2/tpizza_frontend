@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../../assets/logo/logo-remove-bg.png";
 import { Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
+import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,38 +20,9 @@ const Login = () => {
     console.log("Logging in with:", formData);
   };
 
-  const getRandomPizzas = (amount) => {
-    return Array.from({ length: amount }).map((_, i) => ({
-      id: i,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      size: 1 + Math.random() * 2,
-      opacity: 0.05 + Math.random() * 0.05,
-      rotate: Math.random() * 360,
-    }));
-  };
-  const randomPizzas = getRandomPizzas(80);
-
   return (
     <div className="relative flex items-center justify-center min-h-screen px-4 overflow-hidden">
-      {/* 🍕 Pizza Background Layer - behind everything */}
-      <div className="absolute inset-0 z-0">
-        {randomPizzas.map((pizza) => (
-          <div
-            key={pizza.id}
-            className="absolute select-none pointer-events-none"
-            style={{
-              top: `${pizza.top}%`,
-              left: `${pizza.left}%`,
-              fontSize: `${pizza.size}rem`,
-              opacity: pizza.opacity,
-              transform: `rotate(${pizza.rotate}deg)`,
-            }}
-          >
-            🍕
-          </div>
-        ))}
-      </div>
+      <PizzaBackground />
       {/* Login Card */}
       <div className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
         <div className="flex flex-col items-center mb-6">

@@ -24,3 +24,16 @@ input::-webkit-credentials-auto-fill-button {
   pointer-events: none;
   opacity: 0;
 }
+
+/* Default dot */
+.slick-dots li div {
+  background-color: #022c22; /* Tailwind green-950 */
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+/* Active dot */
+.slick-dots li.slick-active div {
+  opacity: 1;
+}
+
+

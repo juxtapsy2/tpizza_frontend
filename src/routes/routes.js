@@ -1,5 +1,7 @@
+import Forgot from "../pages/general/Forgot";
 import Home from "../pages/general/Home";
 import Login from "../pages/general/Login";
+import Register from "../pages/general/Register";
 
 export const publicRoutes = [
     {
@@ -10,6 +12,18 @@ export const publicRoutes = [
     {
       path: "/login",
       component: Login,
+      roles: [], // Guest route
+      authRoute: true,
+    },
+    {
+      path: "/register",
+      component: Register,
+      roles: [], // Guest route
+      authRoute: true,
+    },
+    {
+      path: "/forgot",
+      component: Forgot,
       roles: [], // Guest route
       authRoute: true,
     },

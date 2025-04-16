@@ -1,34 +1,47 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Menu } from "lucide-react";
 import logo from "../../assets/logo/logo-remove-bg.png";
+import { ShoppingCart, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+import { navLinks } from '../../constants';
 
 const NavBar = () => {
   const [cartCount] = useState(0); 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white text-green-950 shadow-md sticky top-0 rounded-none mx-auto w-full z-[999] px-8 py-2 flex justify-between items-center transition-all duration-300">
+    <nav className="bg-white text-green-950 shadow-md sticky top-0 rounded-none mx-auto w-full z-[999] px-8 py-2 flex justify-between items-center transition-all duration-300 h-[70px]">
+      
       {/* Logo */}
-      <div className="flex items-center max-w-[200px]">
+      <Link to="/" className="flex items-center max-w-[200px] h-full">
         <img
           src={logo}
           alt="TPizza Logo"
-          className="h-[60px] w-auto object-contain"
+          className="h-full w-auto object-contain"
         />
-      </div>
+      </Link>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex space-x-6 font-semibold text-lg">
-        <a href="/" className="hover:text-green-600 transition">Trang chủ</a>
-        <a href="/menu" className="hover:text-green-600 transition">Menu</a>
-        <a href="/deals" className="hover:text-green-600 transition">Khuyến mãi</a>
-        <a href="/contact" className="hover:text-green-600 transition">Liên hệ</a>
+      <div className="hidden md:flex h-full space-x-2 font-semibold text-lg items-center">
+        {navLinks.map(({ label, path }) => (
+          <Link
+            key={path}
+            to={path}
+            className="h-full flex items-center px-4 hover:bg-green-950 hover:text-white transition rounded-xl"
+          >
+            {label}
+          </Link>
+        ))}
       </div>
 
       {/* Cart + Login + Menu icon */}
       <div className="flex items-center space-x-4">
-        <a href="/login" className="hidden md:block hover:text-green-600 font-medium transition">Đăng nhập</a>
-        
+        <Link
+          to="/login"
+          className="hidden md:block px-3 py-1 rounded-xl font-medium hover:bg-green-950 hover:text-white transition"
+        >
+          Đăng nhập
+        </Link>
+
         <div className="relative cursor-pointer hover:text-green-600 transition">
           <ShoppingCart size={26} />
           {cartCount > 0 && (
@@ -47,11 +60,21 @@ const NavBar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-20 left-2 right-2 bg-green-900 text-white rounded-xl p-4 flex flex-col space-y-4 text-center md:hidden shadow-lg z-50">
-          <a href="/" className="hover:underline">Trang chủ</a>
-          <a href="/menu" className="hover:underline">Menu</a>
-          <a href="/deals" className="hover:underline">Khuyến mãi</a>
-          <a href="/contact" className="hover:underline">Liên hệ</a>
-          <a href="/login" className="hover:underline">Đăng nhập</a>
+          {navLinks.map(({ label, path }) => (
+            <Link
+              key={path}
+              to={path}
+              className="px-3 py-2 rounded-xl hover:bg-white hover:text-green-900 transition"
+            >
+              {label}
+            </Link>
+          ))}
+          <Link
+            to="/login"
+            className="px-3 py-2 rounded-xl hover:bg-white hover:text-green-900 transition"
+          >
+            Đăng nhập
+          </Link>
         </div>
       )}
     </nav>
