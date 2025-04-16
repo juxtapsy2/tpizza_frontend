@@ -5,7 +5,7 @@ import Footer from './components/Footer/Footer';
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideNavRoutes = [, "/register"];
+  const hideNavRoutes = ["/register",];
 
   return (
     <div className="relative flex flex-col min-h-screen bg-white overflow-hidden">

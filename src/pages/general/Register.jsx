@@ -45,7 +45,7 @@ const Register = () => {
         <div className="flex flex-col items-center mb-6">
           <h2 className="text-2xl font-bold text-green-900">Đăng ký tài khoản</h2>
           <p className="text-sm text-gray-500 font-medium">
-            Hãy gia nhập để đặt 🍕 ngon miệng!
+            Cùng nhập tiệc🍕 ngon miệng!
           </p>
         </div>
 
