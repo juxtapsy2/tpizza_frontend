@@ -57,7 +57,7 @@ function EventCarousel() {
     slidesToScroll: 1,
     arrows: true,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     pauseOnHover: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -97,8 +97,9 @@ function EventCarousel() {
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-contain object-center sm:h-[400px] md:h-[500px] rounded-xl shadow-md bg-transparent focus:outline-none focus:ring-0"
+                className="w-full h-full object-contain object-center sm:h-[400px] md:h-[500px] rounded-xl shadow-md bg-transparent transition-transform duration-500 animate-zoom-in-out"
               />
+
             </div>
           ))}
         </Slider>

@@ -35,5 +35,15 @@ input::-webkit-credentials-auto-fill-button {
 .slick-dots li.slick-active div {
   opacity: 1;
 }
-
-
+/* Slide's animation zoom-in-out */
+.slick-center img {
+  animation: zoomInOut 3s ease-in-out infinite;
+}
+@keyframes zoomInOut {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

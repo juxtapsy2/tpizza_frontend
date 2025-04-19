@@ -37,6 +37,13 @@ module.exports = {
         hideCursor: {
           '100%': { borderColor: 'transparent' }, // Make the cursor disappear by setting border to transparent
         },
+        zoomInOut: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
+        },
+        animation: {
+          'zoom-in-out': 'zoomInOut 3s ease-in-out infinite',
+        },
       },
     },
   },
