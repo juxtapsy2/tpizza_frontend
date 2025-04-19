@@ -9,7 +9,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white text-green-950 shadow-md sticky top-0 rounded-none mx-auto w-full z-[999] px-8 py-2 flex justify-between items-center transition-all duration-300 h-[70px]">
+    <nav className="bg-white text-green-950 shadow-md absolute top-0 rounded-none mx-auto w-full z-[9999] px-8 py-2 flex justify-between items-center transition-all duration-300 h-[70px]">
       
       {/* Logo */}
       <Link to="/" className="flex items-center max-w-[200px] h-full">

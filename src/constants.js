@@ -2,6 +2,12 @@
 
 //export const logo = logo2;
 
+import {
+    GiShrimp, GiTomato, GiChickenOven, GiFullPizza, GiFruitBowl, GiMeat,
+    GiCheeseWedge, GiOlive, GiBarbecue, GiFamilyHouse, GiHotMeal,
+    GiHamburger, GiSpiralBottle, GiCakeSlice, GiHealthCapsule, GiPizzaSlice
+  } from "react-icons/gi";
+
 export const bookingOptions = [
     { id: "delivery", label: "Giao tận nơi" },
     { id: "pickup", label: "Đặt đến lấy" },
@@ -14,28 +20,28 @@ export const navLinks = [
     { label: "Blog", path: "/contact" },
 ];
 
-export const pizzaClasses = {
-    seafood: "Pizza Hải Sản",
-    vegetarian: "Pizza Chay",
-    mixed: "Pizza Hỗn Hợp",
-    fruity: "Pizza Trái Cây",
-    fresh: "Pizza Tươi Mát",
-    meaty: "Pizza Thịt",
-    premium: "Pizza Cao Cấp",
-    cheesy: "Pizza Phô Mai",
-    italian: "Pizza Ý",
-    chicken: "Pizza Gà",
-    "sweet-savory": "Pizza Ngọt Mặn",
-    exotic: "Pizza Lạ",
-    healthy: "Pizza Lành Mạnh",
-    "four-seasons": "Pizza Bốn Mùa",
-    loaded: "Pizza Thêm Topping",
-    cheeseLovers: "Pizza Phô Mai Thêm",
-    "burger-style": "Pizza Kiểu Burger",
-    bbq: "Pizza BBQ",
-    family: "Pizza Dành Cho Gia Đình",
-    classic: "Pizza Cổ Điển",
-    colorful: "Pizza Màu Sắc",
-};
-  
+export const pizzaClasses = [
+    { class: "seafood", label: "Pizza Hải Sản", icon: <GiShrimp /> },
+    { class: "vegetarian", label: "Pizza Chay", icon: <GiTomato /> },
+    { class: "mixed", label: "Pizza Thập Cẩm", icon: <GiFullPizza /> },
+    { class: "fruity", label: "Pizza Trái Cây", icon: <GiFruitBowl /> },
+    { class: "fresh", label: "Pizza Tươi Mát", icon: <GiOlive /> },
+    { class: "meaty", label: "Pizza Thịt", icon: <GiMeat /> },
+    { class: "premium", label: "Pizza Cao Cấp", icon: <GiPizzaSlice /> },
+    { class: "cheesy", label: "Pizza Phô Mai", icon: <GiCheeseWedge /> },
+    { class: "italian", label: "Pizza Ý", icon: <GiOlive /> },
+    { class: "chicken", label: "Pizza Gà", icon: <GiChickenOven /> },
+    { class: "sweet-savory", label: "Pizza Ngọt Mặn", icon: <GiCakeSlice /> },
+    { class: "exotic", label: "Pizza Lạ", icon: <GiSpiralBottle /> },
+    { class: "healthy", label: "Pizza Lành Mạnh", icon: <GiHealthCapsule /> },
+    { class: "four-seasons", label: "Pizza Bốn Mùa", icon: <GiFullPizza /> },
+    { class: "loaded", label: "Pizza Thêm Topping", icon: <GiFullPizza /> },
+    { class: "cheeseLovers", label: "Pizza Phô Mai Thêm", icon: <GiCheeseWedge /> },
+    { class: "burger-style", label: "Pizza Kiểu Burger", icon: <GiHamburger /> },
+    { class: "bbq", label: "Pizza BBQ", icon: <GiBarbecue /> },
+    { class: "family", label: "Pizza Dành Cho Gia Đình", icon: <GiFamilyHouse /> },
+    { class: "classic", label: "Pizza Cổ Điển", icon: <GiHotMeal /> },
+    { class: "colorful", label: "Pizza Màu Sắc", icon: <GiPizzaSlice /> },
+];
+
   

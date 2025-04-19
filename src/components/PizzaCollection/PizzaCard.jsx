@@ -10,14 +10,14 @@ const PizzaCard = ({ pizza }) => {
       />
       <div className="p-4 flex flex-col justify-between h-[200px]">
         <div>
-          <h3 className="text-lg font-semibold text-green-950 mb-1">{pizza.title}</h3>
+          <h3 className="text-xl text-nowrap font-semibold text-green-900 mb-1">{pizza.title}</h3>
           <p className="text-sm text-gray-600 line-clamp-2 mb-3">{pizza.description}</p>
-          <div className="flex justify-between text-sm text-green-600 mb-2">
-            <span>Size: <strong>{pizza.size}</strong> inch</span>
-            <span><strong>{pizza.crustStyle}</strong> Crust</span>
+          <div className="flex justify-between text-sm text-green-700 mb-2">
+            <span>Size: <strong>{pizza.size} inch</strong></span>
+            <span><strong>{pizza.crustStyle} Crust</strong></span>
           </div>
         </div>
-        <div className="text-right text-lg font-bold text-green-700">
+        <div className="text-right text-lg font-bold text-white bg-green-950 w-fit self-end rounded-lg py-2 px-4">
           {pizza.price.toLocaleString()}₫
         </div>
       </div>

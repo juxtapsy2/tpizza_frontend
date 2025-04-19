@@ -47,3 +47,10 @@ input::-webkit-credentials-auto-fill-button {
     transform: scale(1.05);
   }
 }
+
+.swiper {
+  overflow: visible !important; /* For tooltip */
+}
+.swiper-wrapper {
+  overflow: visible !important;
+}
