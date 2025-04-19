@@ -6,7 +6,7 @@ import { publicRoutes, } from './routes/routes';
 import axios from 'axios';
 
 // Set the base URL dynamically based on the environment
-axios.defaults.baseURL = "http://localhost:8800" || process.env.REACT_APP_API_URL;  // Fallback to production if not in localhost
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || "http://localhost:8800";  // Fallback to local if not in production
 
 function App() {
   return (
