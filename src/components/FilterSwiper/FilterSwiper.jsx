@@ -20,11 +20,18 @@ const FilterSwiper = ({ allFilters, selectedFilter, onFilterChange }) => {
   return (
     <Swiper
       spaceBetween={4}
-      slidesPerView={6}
-      centeredSlides={true}
-      loop={true}
+      centeredSlides={false}
+      loop={false}
       grabCursor={true}
-      className="swiper-container text-nowrap bg-green-950 w-full relative mb-8" 
+      className="swiper-container text-nowrap bg-green-950 w-full relative mb-8 overflow-visible"
+      breakpoints={{
+        320: { slidesPerView: 3 },
+        480: { slidesPerView: 4 },
+        640: { slidesPerView: 5 },
+        768: { slidesPerView: 6 },
+        1024: { slidesPerView: 7 },
+        1280: { slidesPerView: 8 },
+      }}
     >
       {allFilters.map(({ class: filterClass, label, icon }, index) => (
         <SwiperSlide key={index} className="swiper-slide cursor-pointer p-2 rounded-lg">
