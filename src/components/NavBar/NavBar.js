@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from "../../assets/logo/logo-remove-bg.png";
 import { ShoppingCart, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,9 +7,23 @@ import { navLinks } from '../../constants';
 const NavBar = () => {
   const [cartCount] = useState(0); 
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 550) {
+        setIsScrolled(true); // Hide navbar when scrolling down 550px
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-white text-green-950 shadow-md absolute top-0 rounded-none mx-auto w-full z-[9999] px-8 py-2 flex justify-between items-center transition-all duration-300 h-[70px]">
+    <nav className={`bg-white text-green-950 shadow-md fixed top-0 rounded-none mx-auto w-full z-[9999] px-8 py-0 flex justify-between items-center transition-all duration-300 h-[70px] ${isScrolled ? 'hidden' : 'block'}`}>
       
       {/* Logo */}
       <Link to="/" className="flex items-center max-w-[200px] h-full">
@@ -21,12 +35,12 @@ const NavBar = () => {
       </Link>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex h-full space-x-2 font-semibold text-lg items-center">
+      <div className="hidden md:flex h-full space-x-0 font-semibold text-lg items-center">
         {navLinks.map(({ label, path }) => (
           <Link
             key={path}
             to={path}
-            className="h-full flex items-center px-4 hover:bg-green-950 hover:text-white transition rounded-xl"
+            className="h-full min-w-[120px] flex items-center justify-center px-2 hover:bg-green-950 hover:text-white transition rounded-none"
           >
             {label}
           </Link>

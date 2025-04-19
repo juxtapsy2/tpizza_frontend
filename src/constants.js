@@ -17,7 +17,7 @@ export const navLinks = [
     { label: "Trang chủ", path: "/" },
     { label: "Thực đơn", path: "/menu" },
     { label: "Khuyến mãi", path: "/deals" },
-    { label: "Blog", path: "/contact" },
+    { label: "Blog", path: "/blog" },
 ];
 
 export const pizzaClasses = [
