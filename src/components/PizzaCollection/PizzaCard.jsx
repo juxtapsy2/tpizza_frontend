@@ -12,9 +12,9 @@ const PizzaCard = ({ pizza }) => {
         <div>
           <h3 className="text-lg font-semibold text-green-950 mb-1">{pizza.title}</h3>
           <p className="text-sm text-gray-600 line-clamp-2 mb-3">{pizza.description}</p>
-          <div className="flex justify-between text-sm text-green-500 mb-2">
-            <span>Size: {pizza.size} inch</span>
-            <span>{pizza.crustStyle} Crust</span>
+          <div className="flex justify-between text-sm text-green-600 mb-2">
+            <span>Size: <strong>{pizza.size}</strong> inch</span>
+            <span><strong>{pizza.crustStyle}</strong> Crust</span>
           </div>
         </div>
         <div className="text-right text-lg font-bold text-green-700">
