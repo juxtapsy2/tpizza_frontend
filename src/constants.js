@@ -1,12 +1,13 @@
-//import logo2 from '../public/images/logo/logo2.png';
-
-//export const logo = logo2;
-
 import {
     GiShrimp, GiTomato, GiChickenOven, GiFullPizza, GiFruitBowl, GiMeat,
     GiCheeseWedge, GiOlive, GiBarbecue, GiFamilyHouse, GiHotMeal,
     GiHamburger, GiSpiralBottle, GiCakeSlice, GiHealthCapsule, GiPizzaSlice
-  } from "react-icons/gi";
+} from "react-icons/gi";
+
+// Configs for differentiating production and development
+export const isDev = process.env.NODE_ENV !== "production";
+export const backendURL = isDev ? "http://localhost:8800" : process.env.BACKEND_URL;
+export const frontendURL = isDev ? "http://localhost:3000" : process.env.FRONTEND_URL;
 
 export const bookingOptions = [
     { id: "delivery", label: "Giao tận nơi" },

@@ -1,12 +1,12 @@
 import axios from "axios";
+import { backendURL } from "../constants";
 
-const isDev = process.env.NODE_ENV !== "production";
-const BASE = isDev ? "http://localhost:8800" : process.env.REACT_APP_API_URL;
 const api = axios.create({
-  baseURL: `${BASE}/api`,
+  baseURL: `${backendURL}/api`,
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // allow cookies in all requests
 });
 
 export default api;

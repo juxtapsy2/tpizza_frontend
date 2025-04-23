@@ -3,11 +3,12 @@ import logo from "../../assets/logo/logo-remove-bg.png";
 import { Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
+import api from "../../config/api";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
+    identifier: "", // This will handle both email or username
     password: "",
   });
 
@@ -15,9 +16,50 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", formData);
+
+    // Check emptiness
+    if (!formData.identifier || !formData.password) {
+      return alert("Vui lòng điền đầy đủ thông tin.");
+    }
+    // Validate email format or username
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const usernameRegex = /^[a-zA-Z0-9_]+$/; // username containing only alphanumeric characters and underscores
+    
+    if (emailRegex.test(formData.identifier)) {
+      // do nothing
+    } else if (usernameRegex.test(formData.identifier)) {
+      // do nothing
+    } else {
+      return alert("Vui lòng nhập một địa chỉ email hợp lệ hoặc tên đăng nhập hợp lệ.");
+    }
+    // Validate password ( > 8 chars, 1 number, 1 special char)
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-])[A-Za-z\d!@#$%^&*()_+={}\[\]:;"'<>,.?/-]{8,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      return alert("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
+    }
+
+    const loginData = {
+      identifier: formData.identifier, // could be either email or username
+      password: formData.password,
+    };
+
+    try {
+      const response = await api.post("/auth/login", loginData, { withCredentials: true });
+
+      if (response.status === 200) {
+        // Success. Store the JWT in cookies
+        console.log("Logged in:", response.data.message);
+        window.location.href = "/";
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Đăng nhập thất bại, vui lòng thử lại.");
+      }
+    }
   };
 
   return (
@@ -35,12 +77,12 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block mb-1 text-sm font-medium text-gray-700">Email</label>
+            <label className="block mb-1 text-sm font-medium text-gray-700">Email/Tên đăng nhập</label>
             <input
-              type="email"
-              name="email"
-              placeholder="pizza_lover@email.com"
-              value={formData.email}
+              type="text"
+              name="identifier"
+              placeholder="pizza_lover@email.com hoặc pizza_lover"
+              value={formData.identifier}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
               required
@@ -50,7 +92,7 @@ const Login = () => {
           <div>
             <label className="block mb-1 text-sm font-medium text-gray-700">Mật khẩu</label>
             <div className="relative">
-                <input
+              <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="••••••••"
@@ -59,19 +101,17 @@ const Login = () => {
                 className="w-full px-4 py-2 pr-10 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
                 required
                 autoComplete="current-password"
-                />
-                <button
+              />
+              <button
                 type="button"
                 className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
                 onClick={() => setShowPassword(!showPassword)}
                 tabIndex={-1}
-                >
+              >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
+              </button>
             </div>
-        </div>
-
-
+          </div>
 
           <button
             type="submit"
