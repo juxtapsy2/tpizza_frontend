@@ -9,9 +9,10 @@ const PizzaCollection = ({ pizzas }) => {
   const [filteredClass, setFilteredClass] = useState("");
 
   // Extract unique pizza classes from data
-  const uniqueClasses = [
-    ...new Set(pizzas.flatMap((pizza) => Array.isArray(pizza.class) ? pizza.class : [pizza.class])),
-  ];
+  const classList = pizzas.map((pizza) =>
+    Array.isArray(pizza.class) ? pizza.class : [pizza.class]
+  );
+  const uniqueClasses = [...new Set([].concat(...classList))];
   const allClasses = uniqueClasses.map((classKey) => {
     const predefinedClass = pizzaClasses.find((item) => item.class === classKey);
     return {
