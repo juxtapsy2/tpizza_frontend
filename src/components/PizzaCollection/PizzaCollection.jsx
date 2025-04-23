@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { pizzaClasses } from "../../constants"; // Updated pizzaClasses import
+import { pizzaClasses } from "../../constants";
 import PizzaCard from "./PizzaCard";
 import FilterSwiper from "../FilterSwiper/FilterSwiper";
 import { GiFullPizza } from "react-icons/gi";
@@ -10,7 +10,7 @@ const PizzaCollection = ({ pizzas }) => {
 
   // Extract unique pizza classes from data
   const uniqueClasses = [
-    ...new Set(pizzas.flatMap((pizza) => pizza.class)),
+    ...new Set(pizzas.flatMap((pizza) => Array.isArray(pizza.class) ? pizza.class : [pizza.class])),
   ];
   const allClasses = uniqueClasses.map((classKey) => {
     const predefinedClass = pizzaClasses.find((item) => item.class === classKey);
