@@ -3,19 +3,16 @@ import logo from "../../assets/logos/logo-remove-bg.png";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { navLinks } from '../../constants';
-import { useAuth } from '../../contexts/AuthContext';
 import UserMenu from '../UserMenu/UserMenu';
 import api from "../../config/api";
 
-const NavBar = () => {
+const NavBar = ({user}) => {
   const [cartCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
 
-  const {user, setUser} = useAuth();  // [] will be wrong if not return an array of users, so use {}.
-  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 550);
@@ -49,7 +46,6 @@ const NavBar = () => {
   const handleLogOut = async () => {
     try {
       await api.post("/auth/logout");
-      setUser(null);
       window.location.href = "/";
     } catch (err) {
       console.error("Không thể đăng xuất:", err);
