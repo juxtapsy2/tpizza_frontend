@@ -29,7 +29,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await axios.post("/api/auth/register", formData);
-      setSuccess("Đăng ký thành công!");
+      setSuccess("Đăng ký thành công! Vui lòng xác nhận email.");
       setError("");
     } catch (err) {
       setError(err.response?.data?.message || "Đăng ký thất bại.");

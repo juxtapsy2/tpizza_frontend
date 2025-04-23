@@ -27,7 +27,7 @@ const Login = () => {
       <div className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
         <div className="flex flex-col items-center mb-6">
           <img src={logo} alt="TPizza Logo" className="h-20 mb-2" />
-          <h2 className="text-2xl font-bold text-green-900">Chào mừng trở lại</h2>
+          <h2 className="text-2xl font-bold text-green-900">Chào mừng</h2>
           <p className="text-sm text-gray-500 font-medium">
             Đăng nhập để đặt 🍕 nóng giòn!
           </p>

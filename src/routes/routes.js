@@ -2,6 +2,7 @@ import Forgot from "../pages/general/Forgot";
 import Home from "../pages/general/Home";
 import Login from "../pages/general/Login";
 import Register from "../pages/general/Register";
+import VerifyEmail from "../pages/general/VerifyEmail";
 
 export const publicRoutes = [
     {
@@ -24,6 +25,12 @@ export const publicRoutes = [
     {
       path: "/forgot",
       component: Forgot,
+      roles: [], // Guest route
+      authRoute: true,
+    },
+    {
+      path: "/verify-email",
+      component: VerifyEmail,
       roles: [], // Guest route
       authRoute: true,
     },
