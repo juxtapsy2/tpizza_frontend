@@ -21,6 +21,16 @@ export const navLinks = [
     { label: "Blog", path: "/blog" },
 ];
 
+export const menuItemsByRole = {
+    User: [
+      { label: "Hồ sơ cá nhân", path: "/profile" },
+      { label: "Lịch sử giao dịch", path: "/orders" },
+    ],
+    Admin: [
+      { label: "Quản lý", path: "/admin/dashboard" },
+    ],
+};
+
 export const pizzaClasses = [
     { class: "seafood", label: "Pizza Hải Sản", icon: <GiShrimp /> },
     { class: "vegetarian", label: "Pizza Chay", icon: <GiTomato /> },
@@ -45,4 +55,6 @@ export const pizzaClasses = [
     { class: "colorful", label: "Pizza Màu Sắc", icon: <GiPizzaSlice /> },
 ];
 
-  
+export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+export const usernameRegex = /^[a-zA-Z0-9_]+$/;
+export const passwordRegex = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-])[A-Za-z\d!@#$%^&*()_+={}\[\]:;"'<>,.?/-]{8,}$/;

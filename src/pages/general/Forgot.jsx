@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/logo/logo-remove-bg.png";
+import logo from "../../assets/logos/logo-remove-bg.png";
 import { Link } from "react-router-dom";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 

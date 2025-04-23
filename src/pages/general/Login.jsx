@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import logo from "../../assets/logo/logo-remove-bg.png";
+import logo from "../../assets/logos/logo-remove-bg.png";
 import { Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 import api from "../../config/api";
+import { emailRegex, usernameRegex, passwordRegex } from "../../constants";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,9 +25,6 @@ const Login = () => {
       return alert("Vui lòng điền đầy đủ thông tin.");
     }
     // Validate email format or username
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const usernameRegex = /^[a-zA-Z0-9_]+$/; // username containing only alphanumeric characters and underscores
-    
     if (emailRegex.test(formData.identifier)) {
       // do nothing
     } else if (usernameRegex.test(formData.identifier)) {
@@ -35,7 +33,6 @@ const Login = () => {
       return alert("Vui lòng nhập một địa chỉ email hợp lệ hoặc tên đăng nhập hợp lệ.");
     }
     // Validate password ( > 8 chars, 1 number, 1 special char)
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-])[A-Za-z\d!@#$%^&*()_+={}\[\]:;"'<>,.?/-]{8,}$/;
     if (!passwordRegex.test(formData.password)) {
       return alert("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
     }

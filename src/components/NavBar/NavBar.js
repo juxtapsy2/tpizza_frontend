@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import logo from "../../assets/logo/logo-remove-bg.png";
+import logo from "../../assets/logos/logo-remove-bg.png";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { navLinks } from '../../constants';
+import { useAuth } from '../../contexts/AuthContext';
+import UserMenu from '../UserMenu/UserMenu';
+import api from "../../config/api";
 
 const NavBar = () => {
   const [cartCount] = useState(0);
@@ -11,6 +14,8 @@ const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
 
+  const {user, setUser} = useAuth();  // [] will be wrong if not return an array of users, so use {}.
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 550);
@@ -41,6 +46,16 @@ const NavBar = () => {
     }, 500); // Wait for the slide out animation to complete then unmount the menu
   };
 
+  const handleLogOut = async () => {
+    try {
+      await api.post("/auth/logout");
+      setUser(null);
+      window.location.href = "/";
+    } catch (err) {
+      console.error("Không thể đăng xuất:", err);
+    }
+  };
+
   return (
     <>
       <nav className={`bg-white text-green-950 shadow-md fixed top-0 w-full z-[50] px-4 sm:px-8 transition-all duration-300 h-[70px] ${isScrolled ? 'hidden' : 'flex'} justify-between items-center`}>
@@ -62,9 +77,13 @@ const NavBar = () => {
         </div>
         {/* Right Side */}
         <div className="flex items-center space-x-4">
-          <Link to="/login" className="hidden md:block px-3 py-1 rounded-xl font-medium hover:bg-green-950 hover:text-white transition">
-            Đăng nhập
-          </Link>
+          {!user ? (
+            <Link to="/login" className="hidden md:block px-3 py-1 rounded-xl font-medium hover:bg-green-950 hover:text-white transition">
+              Đăng nhập
+            </Link>
+          ) : <UserMenu user={user} onLogout={handleLogOut}/>
+          }
+
           <div className="relative cursor-pointer hover:text-green-600 transition">
             <ShoppingCart size={26} />
             {cartCount > 0 && (
@@ -73,7 +92,7 @@ const NavBar = () => {
               </span>
             )}
           </div>
-          {/* Hamburger */}
+
           <div className="md:hidden cursor-pointer" onClick={openMenu}>
             <Menu size={28} />
           </div>
@@ -90,7 +109,7 @@ const NavBar = () => {
               </div>
             </div>
           </div>
-          {/* Menu */}
+          {/* Mobile Menu */}
           <div
             ref={menuRef}
             className={`absolute right-0 top-0 min-w-[50%] h-screen bg-green-900 text-white p-6 shadow-xl
