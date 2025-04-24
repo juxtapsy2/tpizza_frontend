@@ -48,6 +48,10 @@ const Login = () => {
       if (response.status === 200) {
         // Success. Store the JWT in cookies
         console.log("Logged in:", response.data.message);
+        document.cookie.split(";").forEach(cookie => {
+          console.log(cookie);
+        });
+        
         window.location.href = "/";
       }
     } catch (error) {

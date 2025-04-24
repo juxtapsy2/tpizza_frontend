@@ -28,7 +28,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/api/auth/register", formData);
+      await api.post("/auth/register", formData);
       setSuccess("Đăng ký thành công! Vui lòng xác nhận email.");
       setError("");
     } catch (err) {
