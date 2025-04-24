@@ -1,7 +1,7 @@
 // src/pages/Register.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../config/api";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 
 const Register = () => {
@@ -28,7 +28,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/auth/register", formData);
+      await api.post("/api/auth/register", formData);
       setSuccess("Đăng ký thành công! Vui lòng xác nhận email.");
       setError("");
     } catch (err) {
