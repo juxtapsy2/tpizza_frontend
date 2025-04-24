@@ -3,16 +3,19 @@ import logo from "../../assets/logos/logo-remove-bg.png";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { navLinks } from '../../constants';
+import { useAuth } from "../../contexts/AuthContext";
 import UserMenu from '../UserMenu/UserMenu';
 import api from "../../config/api";
 
-const NavBar = ({user}) => {
+const NavBar = () => {
   const [cartCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
-
+  const { user } = useAuth();
+  const isAuthenticated = !!user; // user?	returns user if truthy, undefined/null if falsy
+                                  // !!user	returns true if user is truthy, otherwise false
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 550);
@@ -73,7 +76,7 @@ const NavBar = ({user}) => {
         </div>
         {/* Right Side */}
         <div className="flex items-center space-x-4">
-          {!user ? (
+          {!isAuthenticated ? (
             <Link to="/login" className="hidden md:block px-3 py-1 rounded-xl font-medium hover:bg-green-950 hover:text-white transition">
               Đăng nhập
             </Link>
@@ -133,13 +136,15 @@ const NavBar = ({user}) => {
                 </React.Fragment>
               ))}
               <hr className="border-t border-white/30" />
-              <Link
-                to="/login"
-                className="block py-2 px-3 rounded-md hover:bg-white hover:text-green-900 transition font-medium"
-                onClick={closeMenu}
-              >
-                Đăng nhập
-              </Link>
+              {!isAuthenticated && 
+                <Link
+                  to="/login"
+                  className="block py-2 px-3 rounded-md hover:bg-white hover:text-green-900 transition font-medium"
+                  onClick={closeMenu}
+                >
+                  Đăng nhập
+                </Link>
+              }
             </div>
           </div>
         </div>
