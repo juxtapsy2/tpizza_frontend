@@ -11,8 +11,10 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPizzas = async () => {
+      console.log("Fetching pizzas...");
       try {
         const res = await api.get("/pizza/");
+        console.log("Pizza data:", res.data || []);
         setPizzas(res.data || []);
         setLoading(false);
       } catch (err) {
