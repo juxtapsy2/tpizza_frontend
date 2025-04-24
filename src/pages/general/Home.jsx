@@ -12,8 +12,8 @@ const Home = () => {
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
-        const res = await api.get("/pizza"); // If using proxy or relative path
-        setPizzas(res.data);
+        const res = await api.get("/pizza/");
+        setPizzas(res.data || []);
         setLoading(false);
       } catch (err) {
         console.log("Failed to load pizzas:", err);
