@@ -4,7 +4,7 @@ import PizzaCard from "./PizzaCard";
 import FilterSwiper from "../FilterSwiper/FilterSwiper";
 import { GiFullPizza } from "react-icons/gi";
 
-const PizzaCollection = ({ pizzas }) => {
+const PizzaCollection = ({ pizzas=[] }) => {
   const [showMore, setShowMore] = useState(false);
   const [filteredClass, setFilteredClass] = useState("");
 
