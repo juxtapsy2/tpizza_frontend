@@ -43,7 +43,7 @@ const Login = () => {
     };
 
     try {
-      const response = await api.post("/auth/login", loginData, { withCredentials: true });
+      const response = await api.post("/auth/login", loginData);
 
       if (response.status === 200) {
         // Success. Store the JWT in cookies
@@ -82,7 +82,7 @@ const Login = () => {
             <input
               type="text"
               name="identifier"
-              placeholder="pizza_lover@email.com hoặc pizza_lover"
+              placeholder="pizza_lover@email.com/pizza_lover"
               value={formData.identifier}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"

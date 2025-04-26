@@ -49,7 +49,7 @@ const NavBar = () => {
   const handleLogOut = async () => {
     try {
       await api.post("/auth/logout");
-      window.location.href = "/";
+      window.location.href = "/login";
     } catch (err) {
       console.error("Không thể đăng xuất:", err);
     }

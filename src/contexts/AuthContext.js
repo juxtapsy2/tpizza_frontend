@@ -28,15 +28,6 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const logout = async () => {
-    try {
-      await api.post("/auth/logout");
-    } catch (err) {
-      console.error("Lỗi khi logout:", err);
-    }
-    setUser(null);
-  };
-
   const isAdmin = () => user?.role === "Admin";
 
   const isActive = () => user?.status === "active";
@@ -47,7 +38,6 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         login,
-        logout,
         isAdmin,
         isActive,
         fetchUser,
