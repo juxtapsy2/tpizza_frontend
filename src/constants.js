@@ -58,3 +58,21 @@ export const pizzaClasses = [
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export const usernameRegex = /^[a-zA-Z0-9_]+$/;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-])[A-Za-z\d!@#$%^&*()_+={}\[\]:;"'<>,.?/-]{8,}$/;
+
+export const profileTabs = [
+    {
+      path: "#profile",
+      label: "Thông tin",
+      icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+    },
+    {
+      path: "#transaction",
+      label: "Giao dịch",
+      icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+    },
+    {
+      path: "#policy",
+      label: "Chính sách",
+      icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    },
+];

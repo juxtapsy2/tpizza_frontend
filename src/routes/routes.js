@@ -1,6 +1,7 @@
 import Forgot from "../pages/general/Forgot";
 import Home from "../pages/general/Home";
 import Login from "../pages/general/Login";
+import Profile from "../pages/general/Profile";
 import Register from "../pages/general/Register";
 import VerifyEmail from "../pages/general/VerifyEmail";
 
@@ -33,6 +34,12 @@ export const publicRoutes = [
       component: VerifyEmail,
       roles: [], // Guest route
       authRoute: true,
+    },
+    {
+      path: "/profile",
+      component: Profile,
+      roles: [], // Guest route
+      authRoute: false,
     },
 ];
 
