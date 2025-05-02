@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { profileTabs } from "../../constants";
 
 export const ProfileNavContainer = ({ isActive }) => (
-  <div className="bg-white rounded-lg shadow mb-4">
+  <div className="bg-green-950 rounded-lg shadow mb-4 w-full">
     <nav className="flex flex-wrap">
       {profileTabs.map(({ path, label, icon }) => (
         <NavLink
@@ -11,8 +11,8 @@ export const ProfileNavContainer = ({ isActive }) => (
           to={`/profile${path}`}
           className={`flex items-center px-3 py-4 text-base font-medium border-b-2 flex-1 justify-center transition-colors ${
             isActive(path)
-              ? "border-green-600 text-green-600 bg-green-50"
-              : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50"
+              ? "border-green-600 text-green-900 bg-white"
+              : "border-transparent text-white hover:text-green-600 hover:border-gray-300 hover:bg-gray-50"
           }`}
         >
           <svg

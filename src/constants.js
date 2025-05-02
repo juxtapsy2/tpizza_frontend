@@ -4,7 +4,7 @@ import {
     GiHamburger, GiSpiralBottle, GiCakeSlice, GiHealthCapsule, GiPizzaSlice
 } from "react-icons/gi";
 
-// Configs for differentiating production and development
+// Configs for distinguish production and development
 export const isDev = process.env.NODE_ENV !== "production";
 export const backendURL = isDev ? "http://localhost:8800" : process.env.REACT_APP_BACKEND_URL;
 export const frontendURL = isDev ? "http://localhost:3000" : process.env.FRONTEND_URL;
@@ -31,6 +31,7 @@ export const menuItemsByRole = {
     ],
 };
 
+// Default pre-defined classes for filter
 export const pizzaClasses = [
     { class: "seafood", label: "Pizza Hải Sản", icon: <GiShrimp /> },
     { class: "vegetarian", label: "Pizza Chay", icon: <GiTomato /> },
@@ -67,7 +68,7 @@ export const profileTabs = [
     },
     {
       path: "#transaction",
-      label: "Giao dịch",
+      label: "Lịch sử giao dịch",
       icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
     },
     {

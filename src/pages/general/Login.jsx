@@ -84,6 +84,7 @@ const Login = () => {
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
               required
+              autoComplete="username"
             />
           </div>
 
