@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../config/api";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
+import { toast } from 'react-toastify';
+import { usernameRegex, emailRegex, passwordRegex } from "../../constants";
+import { Eye, EyeOff } from "lucide-react";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +17,7 @@ const Register = () => {
     username: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -27,6 +30,22 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.dateOfBirth || !formData.phone || !formData.email || !formData.username || !formData.password) {
+      return toast.error("Vui lòng điền đầy đủ thông tin.");
+    }
+  
+    if (emailRegex.test(formData.email)) {
+      // valid email
+    } else if (usernameRegex.test(formData.username)) {
+      // valid username
+    } else {
+      return toast.error("Vui lòng nhập email/tên đăng nhập hợp lệ.");
+    }
+  
+    if (!passwordRegex.test(formData.password)) {
+      return toast.error("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
+    }
+
     try {
       await api.post("/auth/register", formData);
       setSuccess("Đăng ký thành công! Vui lòng xác nhận email.");
@@ -52,7 +71,7 @@ const Register = () => {
         {error && <p className="text-red-600 text-center">{error}</p>}
         {success && <p className="text-green-600 text-center">{success}</p>}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form noValidate onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block mb-1 text-sm font-medium text-gray-700">Họ và tên</label>
             <input
@@ -105,15 +124,26 @@ const Register = () => {
           </div>
           <div>
             <label className="block mb-1 text-sm font-medium text-gray-700">Mật khẩu</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full px-4 py-2 pr-10 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+                required
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           <div>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 import api from "../../config/api";
 import { emailRegex, usernameRegex, passwordRegex } from "../../constants";
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,46 +20,42 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check emptiness
+  
     if (!formData.identifier || !formData.password) {
-      return alert("Vui lòng điền đầy đủ thông tin.");
+      return toast.error("Vui lòng điền đầy đủ thông tin.");
     }
-    // Validate email format or username
+  
     if (emailRegex.test(formData.identifier)) {
-      // do nothing
+      // valid email
     } else if (usernameRegex.test(formData.identifier)) {
-      // do nothing
+      // valid username
     } else {
-      return alert("Vui lòng nhập một địa chỉ email hợp lệ hoặc tên đăng nhập hợp lệ.");
+      return toast.error("Vui lòng nhập email/tên đăng nhập hợp lệ.");
     }
-    // Validate password ( > 8 chars, 1 number, 1 special char)
+  
     if (!passwordRegex.test(formData.password)) {
-      return alert("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
+      return toast.error("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
     }
-
+  
     const loginData = {
-      identifier: formData.identifier, // could be either email or username
+      identifier: formData.identifier,
       password: formData.password,
     };
-
+  
     try {
       const response = await api.post("/auth/login", loginData);
-
+  
       if (response.status === 200) {
-        // Success. Store the JWT in cookies
-        console.log("Logged in:", response.data.message);
-        document.cookie.split(";").forEach(cookie => {
-          console.log(cookie);
-        });
-        
-        window.location.href = "/";
+        toast.success("Đăng nhập thành công! 🍕");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1500);
       }
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       } else {
-        alert("Đăng nhập thất bại, vui lòng thử lại.");
+        toast.error("Đăng nhập thất bại, vui lòng thử lại.");
       }
     }
   };
@@ -76,7 +73,7 @@ const Login = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form noValidate onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block mb-1 text-sm font-medium text-gray-700">Email/Tên đăng nhập</label>
             <input
