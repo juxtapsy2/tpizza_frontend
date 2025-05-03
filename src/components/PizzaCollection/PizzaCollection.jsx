@@ -4,7 +4,7 @@ import PizzaCard from "./PizzaCard";
 import FilterSwiper from "../FilterSwiper/FilterSwiper";
 import { GiFullPizza } from "react-icons/gi";
 
-const PizzaCollection = ({ pizzas=[] }) => {
+const PizzaCollection = ({ pizzas = [], onBuyPizza }) => {
   const [showMore, setShowMore] = useState(false);
   const [filteredClass, setFilteredClass] = useState("");
 
@@ -49,7 +49,7 @@ const PizzaCollection = ({ pizzas=[] }) => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {displayedPizzas.map((pizza, index) => (
-            <PizzaCard key={index} pizza={pizza} />
+            <PizzaCard key={index} pizza={pizza} onBuy={onBuyPizza} />
           ))}
         </div>
 

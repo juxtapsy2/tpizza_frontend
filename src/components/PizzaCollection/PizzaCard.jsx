@@ -1,6 +1,6 @@
 import React from "react";
 
-const PizzaCard = ({ pizza }) => {
+const PizzaCard = ({ pizza, onBuy }) => {
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105">
       <img
@@ -17,9 +17,12 @@ const PizzaCard = ({ pizza }) => {
             <span><strong>{pizza.crustStyle} Crust</strong></span>
           </div>
         </div>
-        <div className="text-right text-lg font-bold text-white bg-green-950 w-fit self-end rounded-lg py-2 px-4">
+        <button
+          onClick={() => onBuy(pizza)}
+          className="text-right text-lg font-bold text-white bg-green-950 w-fit self-end rounded-lg py-2 px-4"
+        >
           {pizza.price.toLocaleString()}₫
-        </div>
+        </button>
       </div>
     </div>
   );
