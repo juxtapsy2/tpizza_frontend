@@ -4,6 +4,7 @@ import EventCarousel from "../../components/SlidingCarousel/SlidingCarousel"
 import BookingBar from "../../components/BookingBar/BookingBar";
 import LoadingEffect from "../../components/LoadingEffect/LoadingEffect";
 import PizzaCollection from "../../components/PizzaCollection/PizzaCollection";
+import { getAllPizzasGate } from "../../routes/APIGates";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -13,7 +14,7 @@ const Home = () => {
     const fetchPizzas = async () => {
       console.log("Fetching pizzas...");
       try {
-        const res = await api.get("/pizza/");
+        const res = await api.get(getAllPizzasGate);
         console.log("Pizza data:", res.data || []);
         setPizzas(res.data || []);
         setLoading(false);

@@ -6,6 +6,7 @@ import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 import { toast } from 'react-toastify';
 import { usernameRegex, emailRegex, passwordRegex } from "../../constants";
 import { Eye, EyeOff } from "lucide-react";
+import { registerGate } from "../../routes/APIGates";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ const Register = () => {
     }
 
     try {
-      await api.post("/auth/register", formData);
+      await api.post(registerGate, formData);
       setSuccess("Đăng ký thành công! Vui lòng xác nhận email.");
       setError("");
     } catch (err) {

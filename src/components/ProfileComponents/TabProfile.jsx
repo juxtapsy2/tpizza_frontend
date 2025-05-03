@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import api from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 import { passwordRegex } from '../../constants';
+import { changePasswordGate, updateProfileGate } from '../../routes/APIGates';
 
 export const TabProfile = ({ user }) => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export const TabProfile = ({ user }) => {
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.put("/user/me/update", formData);
+      const response = await api.put(updateProfileGate, formData);
 
       if (response.status === 200) {
         toast.success("Cập nhật thông tin thành công! 🍕");
@@ -82,7 +83,7 @@ export const TabProfile = ({ user }) => {
     }
   
     try {
-      const response = await api.put("/user/me/change-password", {
+      const response = await api.put(changePasswordGate, {
         currentPassword: password.currentPassword,
         newPassword: password.newPassword,
         confirmPassword: password.confirmPassword,

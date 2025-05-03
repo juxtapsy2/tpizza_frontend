@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from "../../config/api";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { verifyEmailGate } from '../../routes/APIGates';
 
 const VerifyEmail = () => {
   const [message, setMessage] = useState('');
@@ -16,7 +17,7 @@ const VerifyEmail = () => {
     if (token) {
       const verifyEmail = async () => {
         try {
-          const response = await api.get(`/auth/verify-email?token=${token}`);
+          const response = await api.get(`${verifyEmailGate}?token=${token}`);
           setMessage(response.data.message);
           setTimeout(() => history('/login'), 3000); // Redirect to login after 3 seconds
         } catch (error) {

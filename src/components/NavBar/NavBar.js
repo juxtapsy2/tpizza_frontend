@@ -6,6 +6,7 @@ import { navLinks } from '../../constants';
 import { useAuth } from "../../contexts/AuthContext";
 import UserMenu from '../UserMenu/UserMenu';
 import api from "../../config/api";
+import { logOutGate } from '../../routes/APIGates';
 
 const NavBar = () => {
   const [cartCount] = useState(0);
@@ -48,7 +49,7 @@ const NavBar = () => {
 
   const handleLogOut = async () => {
     try {
-      await api.post("/auth/logout");
+      await api.post(logOutGate);
       window.location.href = "/login";
     } catch (err) {
       console.error("Không thể đăng xuất:", err);

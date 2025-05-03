@@ -6,6 +6,7 @@ import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 import api from "../../config/api";
 import { emailRegex, usernameRegex, passwordRegex } from "../../constants";
 import { toast } from 'react-toastify';
+import { logInGate } from "../../routes/APIGates";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +44,7 @@ const Login = () => {
     };
   
     try {
-      const response = await api.post("/auth/login", loginData);
+      const response = await api.post(logInGate, loginData);
   
       if (response.status === 200) {
         toast.success("Đăng nhập thành công! 🍕");
