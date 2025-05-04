@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { bookingOptions } from "../../constants";
+import { BOOKING_OPTIONS } from "../../constants";
 
 const BookingBar = () => {
   const [activeOption, setActiveOption] = useState("delivery");
@@ -10,7 +10,7 @@ const BookingBar = () => {
       <div className="max-w-7xl mx-auto flex flex-col gap-4 sm:flex-row items-center justify-between">
         {/* Option Buttons */}
         <div className="flex gap-2 w-full sm:w-1/2 justify-center sm:justify-start">
-          {bookingOptions.map((option) => (
+          {BOOKING_OPTIONS.map((option) => (
             <button
               key={option.id}
               onClick={() => setActiveOption(option.id)}

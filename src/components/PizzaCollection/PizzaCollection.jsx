@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { pizzaClasses } from "../../constants";
+import { PIZZA_CLASSES } from "../../constants";
 import PizzaCard from "./PizzaCard";
 import FilterSwiper from "../FilterSwiper/FilterSwiper";
 import { GiFullPizza } from "react-icons/gi";
@@ -14,7 +14,7 @@ const PizzaCollection = ({ pizzas = [], onBuyPizza }) => {
   );
   const uniqueClasses = [...new Set([].concat(...classList))];
   const allClasses = uniqueClasses.map((classKey) => {
-    const predefinedClass = pizzaClasses.find((item) => item.class === classKey);
+    const predefinedClass = PIZZA_CLASSES.find((item) => item.class === classKey);
     return {
       class: classKey,
       label: predefinedClass?.label || `Pizza ${classKey}`, // Fallback label

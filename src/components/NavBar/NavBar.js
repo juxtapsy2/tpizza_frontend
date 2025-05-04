@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import logo from "../../assets/logos/logo-remove-bg.png";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { navLinks } from '../../constants';
+import { NAVLINKS } from '../../constants';
 import { useAuth } from "../../contexts/AuthContext";
 import UserMenu from '../UserMenu/UserMenu';
 import api from "../../config/api";
@@ -65,7 +65,7 @@ const NavBar = () => {
         </Link>
         {/* Desktop Nav */}
         <div className="hidden md:flex h-full font-semibold text-lg items-center">
-          {navLinks.map(({ label, path }) => (
+          {NAVLINKS.map(({ label, path }) => (
             <Link
               key={path}
               to={path}
@@ -122,7 +122,7 @@ const NavBar = () => {
             </div>
             {/* Navlinks */}
             <div className="flex flex-col gap-4">
-              {navLinks.map(({ label, path }, index) => (
+              {NAVLINKS.map(({ label, path }, index) => (
                 <React.Fragment key={path}>
                   <Link
                     to={path}
@@ -131,7 +131,7 @@ const NavBar = () => {
                   >
                     {label}
                   </Link>
-                  {index !== navLinks.length - 1 && (
+                  {index !== NAVLINKS.length - 1 && (
                     <hr className="border-t border-white/30" />
                   )}
                 </React.Fragment>

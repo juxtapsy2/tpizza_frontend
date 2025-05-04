@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import api from '../../config/api';
 import { useNavigate } from 'react-router-dom';
-import { passwordRegex } from '../../constants';
+import { PASSWORD_REGEX } from '../../constants';
 import { changePasswordGate, updateProfileGate } from '../../routes/APIGates';
 
 export const TabProfile = ({ user }) => {
@@ -72,7 +72,7 @@ export const TabProfile = ({ user }) => {
       toast.error('Mật khẩu mới không khớp');
       return;
     }
-    const passwordFormatWrong = !passwordRegex.test(password.newPassword) || !passwordRegex.test(password.confirmPassword);
+    const passwordFormatWrong = !PASSWORD_REGEX.test(password.newPassword) || !PASSWORD_REGEX.test(password.confirmPassword);
     if (passwordFormatWrong) {
       return toast.error("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
     }
@@ -182,7 +182,7 @@ export const TabProfile = ({ user }) => {
           <h2 className="text-xl font-semibold text-green-950">Đổi mật khẩu</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-950-600">Mật khẩu hiện tại</label>
+              <label className="block text-sm font-medium text-green-950">Mật khẩu hiện tại</label>
               <input
                 type="password"
                 name="currentPassword"

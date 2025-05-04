@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { profileTabs } from "../../constants";
+import { PROFILE_TABS } from "../../constants";
 
 export const ProfileNavContainer = ({ isActive }) => (
   <div className="bg-green-950 rounded-lg shadow mb-4 w-full">
     <nav className="flex flex-wrap">
-      {profileTabs.map(({ path, label, icon }) => (
+      {PROFILE_TABS.map(({ path, label, icon }) => (
         <NavLink
           key={path}
           to={`/profile${path}`}

@@ -4,7 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import PizzaBackground from "../../components/PizzaBackground/PizzaBackground";
 import api from "../../config/api";
-import { emailRegex, usernameRegex, passwordRegex } from "../../constants";
+import { PASSWORD_REGEX, USERNAME_REGEX, EMAIL_REGEX } from "../../constants";
 import { toast } from 'react-toastify';
 import { logInGate } from "../../routes/APIGates";
 
@@ -26,15 +26,15 @@ const Login = () => {
       return toast.error("Vui lòng điền đầy đủ thông tin.");
     }
   
-    if (emailRegex.test(formData.identifier)) {
+    if (EMAIL_REGEX.test(formData.identifier)) {
       // valid email
-    } else if (usernameRegex.test(formData.identifier)) {
+    } else if (USERNAME_REGEX.test(formData.identifier)) {
       // valid username
     } else {
       return toast.error("Vui lòng nhập email/tên đăng nhập hợp lệ.");
     }
   
-    if (!passwordRegex.test(formData.password)) {
+    if (!PASSWORD_REGEX.test(formData.password)) {
       return toast.error("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.");
     }
   

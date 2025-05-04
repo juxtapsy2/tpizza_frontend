@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import default_avt from "../../assets/avatars/default.png";
-import { menuItemsByRole } from "../../constants";
+import { MENU_ITEMS_BY_ROLE } from "../../constants";
 
 export default function UserMenu({ user, onLogout }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -19,7 +19,7 @@ export default function UserMenu({ user, onLogout }) {
   };
 
   const role = user?.role || "User";
-  const menuItems = menuItemsByRole[role] || [];
+  const menuItems = MENU_ITEMS_BY_ROLE[role] || [];
 
   return (
     <div

@@ -1,6 +1,9 @@
 import React from "react";
+import { CRUST_STYLE_VN, PIZZA_PRICES } from "../../constants";
 
 const PizzaCard = ({ pizza, onBuy }) => {
+  const price = PIZZA_PRICES[`${pizza.size}-${pizza.crustStyle}`] || pizza.price;
+
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105">
       <img
@@ -13,15 +16,15 @@ const PizzaCard = ({ pizza, onBuy }) => {
           <h3 className="text-xl text-nowrap font-semibold text-green-900 mb-1">{pizza.title}</h3>
           <p className="text-sm text-gray-600 line-clamp-2 mb-3">{pizza.description}</p>
           <div className="flex justify-between text-sm text-green-700 mb-2">
-            <span>Size: <strong>{pizza.size} inch</strong></span>
-            <span><strong>{pizza.crustStyle} Crust</strong></span>
+            <span>Cỡ: <strong>{pizza.size} inch</strong></span>
+            <span><strong>Đế {CRUST_STYLE_VN[pizza.crustStyle]}</strong></span>
           </div>
         </div>
         <button
           onClick={() => onBuy(pizza)}
           className="text-right text-lg font-bold text-white bg-green-950 w-fit self-end rounded-lg py-2 px-4"
         >
-          {pizza.price.toLocaleString()}₫
+          {price.toLocaleString()}₫
         </button>
       </div>
     </div>
