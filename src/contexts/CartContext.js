@@ -12,7 +12,6 @@ export const CartProvider = ({ children }) => {
     return storedItems ? JSON.parse(storedItems) : [];
   });
   const [cartCount, setCartCount] = useState(0);
-
   const getCartCount = () => cartItems.length;
 
   const getPizzaById = (id) => pizzas.find(p => p._id === id);

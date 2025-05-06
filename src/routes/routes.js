@@ -1,4 +1,5 @@
 import Cart from "../pages/general/Cart";
+import Checkout from "../pages/general/Checkout";
 import Forgot from "../pages/general/Forgot";
 import Home from "../pages/general/Home";
 import Login from "../pages/general/Login";
@@ -14,6 +15,7 @@ export const publicRoutes = [
   { path: "/verify-email", component: VerifyEmail, roles: [] },
   { path: "/profile", component: Profile, roles: ["Admin", "User"] },
   { path: "/cart", component: Cart, roles: ["Admin", "User"] },
+  { path: "/checkout", component: Checkout, roles: ["Admin", "User"] },
 ];
 
 export const adminRoutes = [

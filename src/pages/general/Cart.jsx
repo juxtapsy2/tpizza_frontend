@@ -2,8 +2,10 @@ import React from 'react';
 import { useCart } from '../../contexts/CartContext';
 import { Trash2, Plus, Minus } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const {
     cartItems,
     getPizzaById,
@@ -15,10 +17,6 @@ const Cart = () => {
     calculatePrice, // Assuming this function is available in context
   } = useCart();
 
-  const handleCheckout = () => {
-    toast.info('Thanh toán chưa được tích hợp 😅');
-  };
-
   const handleToppingChange = (index, toppingName, add) => {
     const currentToppings = cartItems[index].toppings || [];
     let updatedToppings;
@@ -29,6 +27,10 @@ const Cart = () => {
     }
     updateItem(index, { toppings: updatedToppings });
   };
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
