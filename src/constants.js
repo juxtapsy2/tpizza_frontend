@@ -7,7 +7,6 @@ import {
 // Configs for distinguish production and development
 export const isDev = process.env.NODE_ENV !== "production";
 export const backendURL = isDev ? "http://localhost:8800" : process.env.REACT_APP_BACKEND_URL;
-export const frontendURL = isDev ? "http://localhost:3000" : process.env.FRONTEND_URL;
 
 export const BOOKING_OPTIONS = [
     { id: "delivery", label: "Giao tận nơi" },
@@ -96,3 +95,6 @@ export const PIZZA_PRICES = {
   "12-Regular": 249000,
   "12-Thick": 269000,
 };
+// Route-related
+export const GUEST_ONLY_ROUTES = ["/login", "/register", "/forgot", "/verify-email"];
+export const HIDE_NAV_ROUTES = ["/register", ];

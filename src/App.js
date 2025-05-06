@@ -7,6 +7,9 @@ import axios from 'axios';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { PizzaProvider } from './contexts/PizzaContext';
+import ProtectedRoute from './components/RouteManipulation/ProtectedRoute';
+import GuestRoute from './components/RouteManipulation/GuestRoute';
+import { GUEST_ONLY_ROUTES } from './constants';
 
 // Set the base URL dynamically based on the environment
 axios.defaults.baseURL = process.env.REACT_APP_API_URL || "http://localhost:8800";  // Fallback to local if not in production
@@ -21,14 +24,22 @@ function App() {
               <Routes>
                 {publicRoutes.map((route) => {
                   const Component = route.component;
+                  const roles = route.roles;
+                  const isProtected = roles.length > 0;
+                  const isGuestOnly = roles.length === 0 && GUEST_ONLY_ROUTES.includes(route.path);
+                  const element = (
+                    <Layout>
+                      <Component />
+                    </Layout>
+                  );
+
                   return (
                     <Route
                       key={route.path}
                       path={route.path}
                       element={
-                        <Layout>
-                          <Component />
-                        </Layout>
+                        isProtected ? (<ProtectedRoute allowedRoles={roles}>{element}</ProtectedRoute>)
+                         : isGuestOnly ? (<GuestRoute>{element}</GuestRoute>) : (element)
                       }
                     />
                   );

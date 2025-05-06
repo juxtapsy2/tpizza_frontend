@@ -7,47 +7,13 @@ import Register from "../pages/general/Register";
 import VerifyEmail from "../pages/general/VerifyEmail";
 
 export const publicRoutes = [
-    {
-      path: "/",
-      component: Home,
-      roles: [], // Guest route
-    },
-    {
-      path: "/login",
-      component: Login,
-      roles: [], // Guest route
-      authRoute: true,
-    },
-    {
-      path: "/register",
-      component: Register,
-      roles: [], // Guest route
-      authRoute: true,
-    },
-    {
-      path: "/forgot",
-      component: Forgot,
-      roles: [], // Guest route
-      authRoute: true,
-    },
-    {
-      path: "/verify-email",
-      component: VerifyEmail,
-      roles: [], // Guest route
-      authRoute: true,
-    },
-    {
-      path: "/profile",
-      component: Profile,
-      roles: ["Admin", "User"],
-      authRoute: false,
-    },
-    {
-      path: "/cart",
-      component: Cart,
-      roles: ["Admin", "User"],
-      authRoute: false,
-    },
+  { path: "/", component: Home, roles: [] }, // Public
+  { path: "/login", component: Login, roles: [] },
+  { path: "/register", component: Register, roles: [] },
+  { path: "/forgot", component: Forgot, roles: [] },
+  { path: "/verify-email", component: VerifyEmail, roles: [] },
+  { path: "/profile", component: Profile, roles: ["Admin", "User"] },
+  { path: "/cart", component: Cart, roles: ["Admin", "User"] },
 ];
 
 export const adminRoutes = [

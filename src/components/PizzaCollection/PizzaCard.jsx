@@ -2,7 +2,7 @@ import React from "react";
 import { CRUST_STYLE_VN, PIZZA_PRICES } from "../../constants";
 
 const PizzaCard = ({ pizza, onBuy }) => {
-  const price = PIZZA_PRICES[`${pizza.defaultSize}-${pizza.defaultCrustStyle}`] || 0;
+  const defaultPrice = PIZZA_PRICES[`${pizza.defaultSize}-${pizza.defaultCrustStyle}`] || 0;
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105">
@@ -24,7 +24,7 @@ const PizzaCard = ({ pizza, onBuy }) => {
           onClick={() => onBuy(pizza)}
           className="text-right text-lg font-bold text-white bg-green-950 w-fit self-end rounded-lg py-2 px-4"
         >
-          {price.toLocaleString()}₫
+          {defaultPrice.toLocaleString()}₫
         </button>
       </div>
     </div>

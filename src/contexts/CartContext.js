@@ -89,9 +89,20 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const calculatePrice = (size, crustStyle) => {
-    const priceKey = `${size}-${crustStyle}`;
-    return PIZZA_PRICES[priceKey] || 0;
+  const calculatePrice = (item) => {
+    const basePrice = PIZZA_PRICES[`${item.size}-${item.crustStyle}`] || 0;
+    const toppingsList = Array.isArray(item.toppings) ? item.toppings : [];
+    const toppingsPrice = toppingsList.reduce((total, toppingName) => {
+      const topping = getPizzaById(item.id)?.toppings?.find((t) => t.name === toppingName);
+      return total + (topping?.price || 0);
+    }, 0);
+    return basePrice + toppingsPrice;
+  };  
+
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => {
+      return total + calculatePrice(item) * item.quantity;
+    }, 0);
   };
 
   return (
@@ -106,7 +117,8 @@ export const CartProvider = ({ children }) => {
         decreaseQuantity,
         removeItem,
         setCartItems,
-        calculatePrice
+        calculatePrice,
+        calculateTotalPrice
       }}
     >
       {children}

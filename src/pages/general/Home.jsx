@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import api from "../../config/api";
 import EventCarousel from "../../components/SlidingCarousel/SlidingCarousel"
 import BookingBar from "../../components/BookingBar/BookingBar";
 import LoadingEffect from "../../components/LoadingEffect/LoadingEffect";

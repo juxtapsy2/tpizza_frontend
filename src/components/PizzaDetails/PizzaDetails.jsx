@@ -6,11 +6,17 @@ import { useCart } from "../../contexts/CartContext";
 const PizzaDetails = ({ pizza, onClose }) => {
   const { addToCart, calculatePrice } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState(pizza.defaultSize || 9); 
+  const [selectedSize, setSelectedSize] = useState(pizza.defaultSize || 9);
   const [selectedCrust, setSelectedCrust] = useState(pizza.defaultCrustStyle || "Thin");
+  const [selectedToppings, setSelectedToppings] = useState([]);
   const modalRef = useRef();
 
-  const price = calculatePrice(selectedSize, selectedCrust, PIZZA_PRICES);
+  const price = calculatePrice({
+    id: pizza._id,
+    size: selectedSize,
+    crustStyle: selectedCrust,
+    toppings: selectedToppings,
+  });
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -23,6 +29,17 @@ const PizzaDetails = ({ pizza, onClose }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  // Handle topping change - add or remove topping
+  const handleToppingChange = (toppingName) => {
+    setSelectedToppings((prevToppings) => {
+      if (prevToppings.includes(toppingName)) {
+        return prevToppings.filter((topping) => topping !== toppingName); // Remove topping
+      } else {
+        return [...prevToppings, toppingName]; // Add topping
+      }
+    });
+  };
+
   const handleAddToCart = () => {
     addToCart({
       id: pizza._id,
@@ -30,12 +47,13 @@ const PizzaDetails = ({ pizza, onClose }) => {
       coverImage: pizza.coverImage,
       size: selectedSize,
       crustStyle: selectedCrust,
+      toppings: selectedToppings,
     }, quantity);
     onClose(); // Close the popup
   };
 
   if (!pizza) return null;
-  // createPortal helps uplift the component outside of its container so it will always be displayed on top
+  // createPortal uplifts component outside of all containers => display on top
   return createPortal(
     <div className="fixed inset-0 z-[9999] bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4">
       <div
@@ -60,7 +78,7 @@ const PizzaDetails = ({ pizza, onClose }) => {
         </div>
 
         {/* Details */}
-        <div className="flex-1 p-6 flex flex-col justify-between">
+        <div className="flex-1 p-6 flex flex-col justify-between overflow-auto max-h-[400px]">
           <div>
             <h1 className="text-3xl font-bold text-green-900 mb-2">{pizza.title}</h1>
             <p className="text-gray-700 mb-4">{pizza.description}</p>
@@ -105,6 +123,31 @@ const PizzaDetails = ({ pizza, onClose }) => {
               </div>
             </div>
 
+            {/* Toppings selection */}
+            {pizza.toppings?.length > 0 && (
+              <div className="mb-4">
+                <label className="block font-semibold text-green-950 mb-1">Topping thêm:</label>
+                <div className="flex gap-2 flex-wrap">
+                  {pizza.toppings.map(({ name, price }) => {
+                    const isSelected = selectedToppings.includes(name);
+                    return (
+                      <button
+                        key={name}
+                        onClick={() => handleToppingChange(name)}
+                        className={`px-3 py-1 rounded-full border font-medium ${
+                          isSelected
+                            ? "bg-green-900 text-white"
+                            : "bg-white text-green-900 border-green-400"
+                        }`}
+                      >
+                        {name} (+{price.toLocaleString()}₫)
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Quantity & Price */}
             <div className="flex flex-row justify-between pt-4 pr-2">
               <div className="flex items-center gap-2">
@@ -118,13 +161,10 @@ const PizzaDetails = ({ pizza, onClose }) => {
                 />
               </div>
               <div className="align-middle pt-1 text-xl font-bold text-green-950">
-                Tổng: {(calculatePrice(selectedSize, selectedCrust, PIZZA_PRICES) * quantity).toLocaleString()}
-                ₫
+                Tổng: {(price * quantity).toLocaleString()} ₫
               </div>
             </div>
           </div>
-
-          
 
           <button
             onClick={handleAddToCart}
