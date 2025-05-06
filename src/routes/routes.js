@@ -1,3 +1,4 @@
+import Cart from "../pages/general/Cart";
 import Forgot from "../pages/general/Forgot";
 import Home from "../pages/general/Home";
 import Login from "../pages/general/Login";
@@ -38,7 +39,13 @@ export const publicRoutes = [
     {
       path: "/profile",
       component: Profile,
-      roles: [], // Guest route
+      roles: ["Admin", "User"],
+      authRoute: false,
+    },
+    {
+      path: "/cart",
+      component: Cart,
+      roles: ["Admin", "User"],
       authRoute: false,
     },
 ];

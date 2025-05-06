@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { PIZZA_PRICES, CRUST_STYLE_VN } from "../../constants";
+import { useCart } from "../../contexts/CartContext";
 
 const PizzaDetails = ({ pizza, onClose }) => {
+  const { addToCart, calculatePrice } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(pizza.size || 9); // Default to 9 inch
   const [selectedCrust, setSelectedCrust] = useState(pizza.crustStyle || "Thin"); // Default to Thin
   const modalRef = useRef();
 
-  const calculatePrice = (size, crustStyle, priceList) => {
-    const priceKey = `${size}-${crustStyle}`;
-    return priceList[priceKey] || 0;
-  };
   const price = calculatePrice(selectedSize, selectedCrust, PIZZA_PRICES);
 
   useEffect(() => {
@@ -25,8 +23,19 @@ const PizzaDetails = ({ pizza, onClose }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  if (!pizza) return null;
+  const handleAddToCart = () => {
+    addToCart({
+      id: pizza._id,
+      title: pizza.title,
+      coverImage: pizza.coverImage,
+      size: selectedSize,
+      crustStyle: selectedCrust,
+    }, quantity);
+    onClose(); // Close the popup
+  };
 
+  if (!pizza) return null;
+  // createPortal helps uplift the component outside of its container so it will always be displayed on top
   return createPortal(
     <div className="fixed inset-0 z-[9999] bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4">
       <div
@@ -118,9 +127,7 @@ const PizzaDetails = ({ pizza, onClose }) => {
           
 
           <button
-            onClick={() =>
-              console.log(`Add ${quantity} x ${pizza.title} (${selectedSize}", ${selectedCrust}) to cart`)
-            }
+            onClick={handleAddToCart}
             className="mt-6 bg-green-900 text-white font-semibold py-2 px-4 rounded-xl hover:bg-green-800 transition"
           >
             Thêm vào giỏ hàng

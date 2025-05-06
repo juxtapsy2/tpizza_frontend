@@ -7,9 +7,10 @@ import { useAuth } from "../../contexts/AuthContext";
 import UserMenu from '../UserMenu/UserMenu';
 import api from "../../config/api";
 import { logOutGate } from '../../routes/APIGates';
+import { useCart } from '../../contexts/CartContext';
 
 const NavBar = () => {
-  const [cartCount] = useState(0);
+  const { cartCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -84,14 +85,14 @@ const NavBar = () => {
           ) : <UserMenu user={user} onLogout={handleLogOut}/>
           }
 
-          <div className="relative cursor-pointer hover:text-green-600 transition">
+          <Link to='/cart' className="relative cursor-pointer hover:text-green-600 transition">
             <ShoppingCart size={26} />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-white text-red-600 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full animate-pulse">
+              <span className="absolute -top-2 -right-2 bg-green-900 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full animate-pulse">
                 {cartCount}
               </span>
             )}
-          </div>
+          </Link>
 
           <div className="md:hidden cursor-pointer" onClick={openMenu}>
             <Menu size={28} />

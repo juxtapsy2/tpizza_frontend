@@ -86,7 +86,7 @@ export const CRUST_STYLE_VN = {
 };
 
 export const PIZZA_PRICES = {
-  "7-Thin": 90000,
+  "7-Thin": 99000,
   "7-Regular": 109000,
   "7-Thick": 129000,
   "9-Thin": 149000,
