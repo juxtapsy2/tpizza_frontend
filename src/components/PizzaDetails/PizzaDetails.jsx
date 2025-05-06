@@ -6,8 +6,8 @@ import { useCart } from "../../contexts/CartContext";
 const PizzaDetails = ({ pizza, onClose }) => {
   const { addToCart, calculatePrice } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState(pizza.size || 9); // Default to 9 inch
-  const [selectedCrust, setSelectedCrust] = useState(pizza.crustStyle || "Thin"); // Default to Thin
+  const [selectedSize, setSelectedSize] = useState(pizza.defaultSize || 9); 
+  const [selectedCrust, setSelectedCrust] = useState(pizza.defaultCrustStyle || "Thin");
   const modalRef = useRef();
 
   const price = calculatePrice(selectedSize, selectedCrust, PIZZA_PRICES);

@@ -5,29 +5,17 @@ import BookingBar from "../../components/BookingBar/BookingBar";
 import LoadingEffect from "../../components/LoadingEffect/LoadingEffect";
 import PizzaCollection from "../../components/PizzaCollection/PizzaCollection";
 import PizzaDetails from "../../components/PizzaDetails/PizzaDetails";
-import { getAllPizzasGate } from "../../routes/APIGates";
+import { usePizzas } from "../../contexts/PizzaContext";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
-  const [pizzas, setPizzas] = useState([]);
   const [selectedPizza, setSelectedPizza] = useState(null);
+  const { pizzas } = usePizzas();
 
   useEffect(() => {
-    const fetchPizzas = async () => {
-      console.log("Fetching pizzas...");
-      try {
-        const res = await api.get(getAllPizzasGate);
-        console.log("Pizza data:", res.data || []);
-        setPizzas(res.data || []);
-        setLoading(false);
-      } catch (err) {
-        console.log("Failed to load pizzas:", err);
-        setLoading(false);
-      }
-    };
-    fetchPizzas();
-  }, []);
-
+    if (pizzas) setLoading(false);
+  }, [pizzas]);
+  
   return (
     <div>
       {loading && <LoadingEffect />}

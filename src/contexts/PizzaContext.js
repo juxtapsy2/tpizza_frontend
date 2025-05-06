@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "../config/api";
+import { getAllPizzasGate } from "../routes/APIGates";
 
 const PizzaContext = createContext();
 
@@ -9,7 +10,7 @@ export const PizzaProvider = ({ children }) => {
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
-        const res = await api.get("/pizza/");
+        const res = await api.get(getAllPizzasGate);
         setPizzas(res.data);
       } catch (err) {
         console.error("Failed to fetch pizzas:", err);
