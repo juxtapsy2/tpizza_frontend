@@ -1,7 +1,6 @@
 import React from 'react';
 import { useCart } from '../../contexts/CartContext';
 import { Trash2, Plus, Minus } from 'lucide-react';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
@@ -14,7 +13,7 @@ const Cart = () => {
     removeItem,
     updateItem,
     calculateTotalPrice,
-    calculatePrice, // Assuming this function is available in context
+    calculatePrice,
   } = useCart();
 
   const handleToppingChange = (index, toppingName, add) => {

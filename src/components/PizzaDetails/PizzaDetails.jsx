@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { PIZZA_PRICES, CRUST_STYLE_VN } from "../../constants";
+import { CRUST_STYLE_VN } from "../../constants";
 import { useCart } from "../../contexts/CartContext";
+import { toast } from "react-toastify";
 
 const PizzaDetails = ({ pizza, onClose }) => {
   const { addToCart, calculatePrice } = useCart();
@@ -44,12 +45,14 @@ const PizzaDetails = ({ pizza, onClose }) => {
     addToCart({
       id: pizza._id,
       title: pizza.title,
+      slug: pizza.slug,
       coverImage: pizza.coverImage,
       size: selectedSize,
       crustStyle: selectedCrust,
       toppings: selectedToppings,
     }, quantity);
     onClose(); // Close the popup
+    toast.success("Đã thêm bánh vào giỏ hàng");
   };
 
   if (!pizza) return null;

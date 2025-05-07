@@ -8,6 +8,10 @@ import {
 export const isDev = process.env.NODE_ENV !== "production";
 export const backendURL = isDev ? "http://localhost:8800" : process.env.REACT_APP_BACKEND_URL;
 
+// Route-related
+export const GUEST_ONLY_ROUTES = ["/login", "/register", "/forgot", "/verify-email"];
+export const HIDE_NAV_ROUTES = ["/register", ];
+
 export const BOOKING_OPTIONS = [
     { id: "delivery", label: "Giao tận nơi" },
     { id: "pickup", label: "Đặt đến lấy" },
@@ -95,6 +99,27 @@ export const PIZZA_PRICES = {
   "12-Regular": 249000,
   "12-Thick": 269000,
 };
-// Route-related
-export const GUEST_ONLY_ROUTES = ["/login", "/register", "/forgot", "/verify-email"];
-export const HIDE_NAV_ROUTES = ["/register", ];
+// export const PIZZA_PRICES = { // test payment
+//   "7-Thin": 10000,
+//   "7-Regular": 10000,
+//   "7-Thick": 10000,
+//   "9-Thin": 10000,
+//   "9-Regular": 10000,
+//   "9-Thick": 10000,
+//   "12-Thin": 10000,
+//   "12-Regular": 10000,
+//   "12-Thick": 10000,
+// };
+
+export const ORDER_STATUS_VN = {
+  processing: "Đang xử lý...",
+  cooking: "Đang chuẩn bị...",
+  ongoing: "Đang tiến hành...",
+  accomplished: "Hoàn thành",
+  cancelled: "Đã hủy", 
+}
+
+export const PAYMENT_METHOD = {
+  cod: "Thanh toán khi nhận hàng",
+  momo: "Ví điện tử Momo",
+}

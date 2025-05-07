@@ -1,8 +1,14 @@
+export const getUserGate = "/user/me";
 export const uploadAvatarGate = "/user/me/avatar";
 export const changePasswordGate = "/user/me/change-password";
 export const updateProfileGate = "/user/me/update";
+export const updateAddressGate = "/user/update-address";
 export const logInGate = "/auth/login";
 export const logOutGate = "/auth/logout";
 export const registerGate = "/auth/register";
 export const verifyEmailGate = "/auth/verify-email";
 export const getAllPizzasGate = "/pizza/";
+export const momoPaymentGate = "/payment/momo";
+export const createOrderGate = "/order/create";
+export const getOrdersByUserGate = "/order/my-orders";
+export const cancelOrderGate = "/order/cancel";

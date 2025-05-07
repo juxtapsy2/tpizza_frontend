@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import api from "../config/api";
 import { useLocation } from "react-router-dom";
+import { getUserGate } from "../routes/APIGates";
 
 const AuthContext = createContext();
 
@@ -11,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const res = await api.get("/user/me");
+      const res = await api.get(getUserGate);
       setUser(res.data);
     } catch (err) {
       setUser(null);

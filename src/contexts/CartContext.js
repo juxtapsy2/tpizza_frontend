@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
       // If the pizza doesn't exist, add a new entry with the selected quantity
       setCartItems((prevItems) => [
         ...prevItems,
-        { ...pizza, quantity, price: calculatePrice(pizza.size, pizza.crustStyle) }
+        { ...pizza, slug: pizza.slug, quantity, price: calculatePrice(pizza.size, pizza.crustStyle) }
       ]);
     }
   };

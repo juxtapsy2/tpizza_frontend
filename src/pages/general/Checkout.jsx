@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
 import api from '../../config/api';
 import { toast } from "react-toastify";
 import { CRUST_STYLE_VN } from "../../constants";
 import MomoLogo from "../../assets/logos/momo.png";
+import { momoPaymentGate, updateAddressGate } from "../../routes/APIGates";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { Wallet, MapPin } from "lucide-react";
 
 const Checkout = () => {
+  const { user, setUser } = useAuth();
   const { cartItems, calculatePrice, calculateTotalPrice } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [loading, setLoading] = useState(false);
+  const [address, setAddress] = useState(user?.address || ""); 
   const total = calculateTotalPrice();
+  const navigate = useNavigate();
 
   const handleMomoPayment = async () => {
     setLoading(true);
     try {
-      // Call your backend to create a Momo payment request
-      const response = await api.post("/api/momo-payment", {
-        amount: total,  // Total amount for payment
-        id: new Date().toISOString(),  // Unique order ID
+      const response = await api.post(momoPaymentGate, {
+        amount: total, 
+        userId: user?._id,      
       });
-
       // Redirect the user to Momo's payment page
       window.location.href = response.data.payUrl;
     } catch (error) {
@@ -27,6 +32,34 @@ const Checkout = () => {
       toast.error("Yêu cầu thanh toán thất bại. Vui lòng thử lại.");
     }
     setLoading(false);
+  };
+
+  const handleCODPayment = async () => {
+    if (!address) {
+      toast.error("Vui lòng điền địa chỉ giao hàng!");
+      return;
+    }
+    toast.success("Đặt hàng thành công với phương thức thanh toán COD!");
+    navigate("/thanks?method=cod");
+  };
+
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const handleSubmitAddress = async () => {
+    if (address.trim() === "") {
+      toast.error("Địa chỉ không được để trống!");
+      return;
+    }
+
+    try {
+      const response = await api.put(updateAddressGate, { address }); 
+      setUser({ ...user, address });
+      toast.success("Địa chỉ đã được cập nhật!");
+    } catch (error) {
+      toast.error("Lỗi khi cập nhật địa chỉ. Vui lòng thử lại.");
+    }
   };
 
   return (
@@ -87,7 +120,27 @@ const Checkout = () => {
           </div>
         </div>
 
-        <hr />
+        {/* Address Section */}
+        <div>
+          <h3 className="text-xl font-semibold">Địa Chỉ Giao Hàng</h3>
+          <textarea
+            value={address}
+            onChange={handleAddressChange}
+            rows="3"
+            className="w-full p-2 border border-gray-300 rounded-md mt-2"
+            placeholder="Nhập địa chỉ giao hàng"
+          />
+          <div className = "flex flex-row justify-between">
+            <div />
+            <button
+              onClick={handleSubmitAddress}
+              className="w-[50%] py-2 bg-green-900 text-white font-semibold rounded-lg mt-4 hover:bg-green-600 flex items-center justify-center space-x-2"
+            >
+              <MapPin className="w-5 h-5" />
+              <span>Cập Nhật Địa Chỉ</span>
+            </button>
+          </div>
+        </div>
 
         {/* Order Summary Section */}
         <div className="order-summary">
@@ -102,7 +155,7 @@ const Checkout = () => {
           {paymentMethod === "momo" ? (
             <button
               onClick={handleMomoPayment}
-              className="w-full py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition flex items-center justify-center space-x-2"
+              className="w-full py-2  font-semibold bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition flex items-center justify-center space-x-2"
             >
               {loading ? (
                 "Đang xử lý..."
@@ -115,18 +168,10 @@ const Checkout = () => {
             </button>
           ) : (
             <button
-              className="w-full py-2 bg-green-900 text-white rounded-lg hover:bg-green-600 transition flex items-center justify-center space-x-2"
+              onClick={handleCODPayment}
+              className="w-full py-2 font-semibold bg-green-900 text-white rounded-lg hover:bg-green-600 transition flex items-center justify-center space-x-2"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75h19.5m-19.5 0A2.25 2.25 0 004.5 4.5h15a2.25 2.25 0 012.25 2.25m-19.5 0v10.5A2.25 2.25 0 004.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75m-6.75 7.5H9.75" />
-              </svg>
+              <Wallet className="w-5 h-5" />
               <span>Đặt Hàng</span>
             </button>
           )}
