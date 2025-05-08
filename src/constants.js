@@ -92,23 +92,30 @@ export const PIZZA_PRICES = {
   "7-Thin": 99000,
   "7-Regular": 109000,
   "7-Thick": 129000,
+  "7-Stuffed": 149000,   
   "9-Thin": 149000,
   "9-Regular": 159000,
   "9-Thick": 169000,
+  "9-Stuffed": 189000,   
   "12-Thin": 229000,
   "12-Regular": 249000,
   "12-Thick": 269000,
+  "12-Stuffed": 299000, 
 };
-// export const PIZZA_PRICES = { // test payment
+
+// export const PIZZA_PRICES = {  // test payment
 //   "7-Thin": 10000,
 //   "7-Regular": 10000,
 //   "7-Thick": 10000,
+//   "7-Stuffed": 10000,   
 //   "9-Thin": 10000,
 //   "9-Regular": 10000,
 //   "9-Thick": 10000,
+//   "9-Stuffed": 10000,   
 //   "12-Thin": 10000,
 //   "12-Regular": 10000,
 //   "12-Thick": 10000,
+//   "12-Stuffed": 10000, 
 // };
 
 export const ORDER_STATUS_VN = {
