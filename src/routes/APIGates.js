@@ -12,3 +12,7 @@ export const momoPaymentGate = "/payment/momo";
 export const createOrderGate = "/order/create";
 export const getOrdersByUserGate = "/order/my-orders";
 export const cancelOrderGate = "/order/cancel";
+export const getSalesOverTimeGate = "/admin/sales?range=";
+export const getAllOrdersGate = "/admin/orders";
+export const updateOrderStatusGate = "";
+export const getUserByIdGate = (userId) => `/admin/user/${userId}`;

@@ -8,6 +8,8 @@ import Register from "../pages/general/Register";
 import Thanks from "../pages/general/Thanks";
 import VerifyEmail from "../pages/general/VerifyEmail";
 import Menu from "../pages/general/Menu";
+import Dashboard from "../pages/admin/Dashboard";
+import ManageOrder from "../pages/admin/ManageOrder";
 
 export const publicRoutes = [
   { path: "/", component: Home, roles: [] }, // Public
@@ -23,16 +25,16 @@ export const publicRoutes = [
 ];
 
 export const adminRoutes = [
-    // {
-    //   path: "/admin",
-    //   component: Dashboard,
-    //   roles: ["Admin"], // Guest route
-    //   protected: true,
-    // },
-    // {
-    //   path: "/admin/users",
-    //   component: ManageUser,
-    //   roles: ["Admin"], // Guest route
-    //   protected: true,
-    // },
+    {
+      path: "/admin",
+      component: Dashboard,
+      roles: ["Admin"],
+      protected: true,
+    },
+    {
+      path: "/admin/manage-order",
+      component: ManageOrder,
+      roles: ["Admin"],
+      protected: true,
+    },
 ]

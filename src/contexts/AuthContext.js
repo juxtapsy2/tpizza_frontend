@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import api from "../config/api";
 import { useLocation } from "react-router-dom";
-import { getUserGate } from "../routes/APIGates";
+import { getUserByIdGate, getUserGate } from "../routes/APIGates";
 
 const AuthContext = createContext();
 
@@ -23,14 +23,23 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
-  }, [location.pathname]); // gọi lại khi thay đổi route
+  }, [location.pathname]); // re-fetch on route change
 
   const login = (userData) => {
     setUser(userData);
   };
 
-  const isAdmin = () => user?.role === "Admin";
+  const getUserById = async (userId) => {
+    try {
+      const res = await api.get(getUserByIdGate(userId), { withCredentials: true });
+      return res.data; // Assuming the response returns user data
+    } catch (err) {
+      console.error("Error fetching user by ID:", err);
+      return null; // Return null in case of error
+    }
+  };
 
+  const isAdmin = () => user?.role === "Admin";
   const isActive = () => user?.status === "active";
 
   return (
@@ -39,6 +48,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         login,
+        getUserById,
         isAdmin,
         isActive,
         fetchUser,

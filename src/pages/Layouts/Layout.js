@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer';
+import NavBar from '../../components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { HIDE_NAV_ROUTES } from './constants';
+import { HIDE_NAV_ROUTES } from '../../constants';
 
 const Layout = ({ children }) => {
   const location = useLocation();

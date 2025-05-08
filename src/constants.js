@@ -3,6 +3,7 @@ import {
     GiCheeseWedge, GiOlive, GiBarbecue, GiFamilyHouse, GiHotMeal,
     GiHamburger, GiSpiralBottle, GiCakeSlice, GiHealthCapsule, GiPizzaSlice
 } from "react-icons/gi";
+import { BarChart, Users, Receipt, Pizza } from "lucide-react";
 
 // Configs for distinguish production and development
 export const isDev = process.env.NODE_ENV !== "production";
@@ -30,9 +31,17 @@ export const MENU_ITEMS_BY_ROLE = {
       { label: "Lịch sử giao dịch", path: "/orders" },
     ],
     Admin: [
-      { label: "Quản lý", path: "/admin/dashboard" },
+      { label: "Hồ sơ cá nhân", path: "/profile" },
+      { label: "Quản lý", path: "/admin" },
     ],
 };
+
+export const ADMIN_NAV_ITEMS = [
+  { label: 'Thống kê', path: '/admin', icon: BarChart },
+  { label: 'Quản lý người dùng', path: '/admin/manage-user', icon: Users },
+  { label: 'Quản lý đơn hàng', path: '/admin/manage-order', icon: Receipt },
+  { label: 'Quản lý menu', path: '/admin/manage-menu', icon: Pizza },
+];
 
 // Default pre-defined classes for filter
 export const PIZZA_CLASSES = [
@@ -122,7 +131,7 @@ export const ORDER_STATUS_VN = {
   processing: "Đang xử lý...",
   cooking: "Đang chuẩn bị...",
   ongoing: "Đang tiến hành...",
-  accomplished: "Hoàn thành",
+  accomplished: "Hoàn tất",
   cancelled: "Đã hủy", 
 }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import Layout from './Layout';
+import Layout from './pages/Layouts/Layout';
+import AdminLayout from './pages/Layouts/AdminLayout';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes, } from './routes/routes';
+import { publicRoutes, adminRoutes } from './routes/routes';
 import axios from 'axios';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
@@ -40,6 +41,26 @@ function App() {
                       element={
                         isProtected ? (<ProtectedRoute allowedRoles={roles}>{element}</ProtectedRoute>)
                          : isGuestOnly ? (<GuestRoute>{element}</GuestRoute>) : (element)
+                      }
+                    />
+                  );
+                })}
+                {adminRoutes.map((route) => {
+                  const Component = route.component;
+                  const element = (
+                    <AdminLayout>
+                      <Component />
+                    </AdminLayout>
+                  );
+
+                  return (
+                    <Route
+                      key={route.path}
+                      path={route.path}
+                      element={
+                        route.protected
+                          ? <ProtectedRoute allowedRoles={route.roles}>{element}</ProtectedRoute>
+                          : element
                       }
                     />
                   );
