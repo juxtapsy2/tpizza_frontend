@@ -7,6 +7,7 @@ import Profile from "../pages/general/Profile";
 import Register from "../pages/general/Register";
 import Thanks from "../pages/general/Thanks";
 import VerifyEmail from "../pages/general/VerifyEmail";
+import Menu from "../pages/general/Menu";
 
 export const publicRoutes = [
   { path: "/", component: Home, roles: [] }, // Public
@@ -18,6 +19,7 @@ export const publicRoutes = [
   { path: "/cart", component: Cart, roles: ["Admin", "User"] },
   { path: "/checkout", component: Checkout, roles: ["Admin", "User"] },
   { path: "/thanks", component: Thanks, roles: [] },
+  { path: "/menu", component: Menu, roles: [] },
 ];
 
 export const adminRoutes = [

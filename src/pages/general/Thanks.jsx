@@ -13,6 +13,7 @@ const Thanks = () => {
   const [message, setMessage] = useState("");
   const { cartItems, calculateTotalPrice, setCartItems } = useCart();
   const hasOrderedRef = useRef(false);
+  const isForTakeAway = localStorage.getItem("tpizza_takeaway");
 
   useEffect(() => {
     if (hasOrderedRef.current) return;
@@ -42,13 +43,14 @@ const Thanks = () => {
         userId: user?._id,
         paymentMethod: "cod",
       };
-
+      const codMessage = isForTakeAway ? "Đặt hàng thành công. Ước tính thời gian chuẩn bị từ 15-30 phút. Vui lòng đến cửa hàng để nhận hàng kịp lúc." : "Đặt hàng thành công với phương thức COD. Vui lòng thanh toán khi nhận được hàng!"; 
       api
         .post(createOrderGate, orderPayload)
         .then(() => {
           setStatus("success");
-          setMessage("Đơn hàng của bạn đã được ghi nhận. Vui lòng thanh toán khi nhận hàng.");
+          setMessage(codMessage);
           setCartItems([]);
+          localStorage.removeItem("tpizza_takeaway");
         })
         .catch((err) => {
           console.error("Order creation failed", err);
@@ -68,7 +70,7 @@ const Thanks = () => {
 
     if (resultCode === "0") {
       let userId = user?._id;
-
+      const momoMsg = isForTakeAway ? "Đặt hàng thành công. Ước tính thời gian chuẩn bị từ 15-30 phút. Vui lòng đến cửa hàng để nhận hàng kịp lúc." : "Đặt hàng thành công với ví điện tử Momo!";
       if (extraDataEncoded) {
         try {
           const extraDataDecoded = JSON.parse(atob(extraDataEncoded));
@@ -89,8 +91,9 @@ const Thanks = () => {
         .post(createOrderGate, orderPayload)
         .then(() => {
           setStatus("success");
-          setMessage("Thanh toán qua Momo thành công! Cảm ơn bạn đã đặt hàng.");
+          setMessage(momoMsg);
           setCartItems([]);
+          localStorage.removeItem("tpizza_takeaway");
         })
         .catch((err) => {
           console.error("Order creation failed", err);

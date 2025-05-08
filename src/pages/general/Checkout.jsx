@@ -17,6 +17,7 @@ const Checkout = () => {
   const [address, setAddress] = useState(user?.address || ""); 
   const total = calculateTotalPrice();
   const navigate = useNavigate();
+  const isForTakeAway = localStorage.getItem("tpizza_takeaway");
 
   const handleMomoPayment = async () => {
     setLoading(true);
@@ -35,11 +36,7 @@ const Checkout = () => {
   };
 
   const handleCODPayment = async () => {
-    if (!address) {
-      toast.error("Vui lòng điền địa chỉ giao hàng!");
-      return;
-    }
-    toast.success("Đặt hàng thành công với phương thức thanh toán COD!");
+    toast.success("Đặt hàng thành công. Vui lòng thanh toán khi nhận hàng!");
     navigate("/thanks?method=cod");
   };
 
@@ -121,26 +118,29 @@ const Checkout = () => {
         </div>
 
         {/* Address Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Địa Chỉ Giao Hàng</h3>
-          <textarea
-            value={address}
-            onChange={handleAddressChange}
-            rows="3"
-            className="w-full p-2 border border-gray-300 rounded-md mt-2"
-            placeholder="Nhập địa chỉ giao hàng"
-          />
-          <div className = "flex flex-row justify-between">
-            <div />
-            <button
-              onClick={handleSubmitAddress}
-              className="w-[50%] py-2 bg-green-900 text-white font-semibold rounded-lg mt-4 hover:bg-green-600 flex items-center justify-center space-x-2"
-            >
-              <MapPin className="w-5 h-5" />
-              <span>Cập Nhật Địa Chỉ</span>
-            </button>
+        {!isForTakeAway && (
+          <div>
+            <h3 className="text-xl font-semibold">Địa Chỉ Giao Hàng</h3>
+            <textarea
+              value={address}
+              onChange={handleAddressChange}
+              rows="3"
+              className="w-full p-2 border border-gray-300 rounded-md mt-2"
+              placeholder="Nhập địa chỉ giao hàng"
+            />
+            <div className = "flex flex-row justify-between">
+              <div />
+              <button
+                onClick={handleSubmitAddress}
+                className="w-[50%] py-2 bg-green-900 text-white font-semibold rounded-lg mt-4 hover:bg-green-600 flex items-center justify-center space-x-2"
+              >
+                <MapPin className="w-5 h-5" />
+                <span>Cập Nhật Địa Chỉ</span>
+              </button>
+            </div>
           </div>
-        </div>
+          )
+        }
 
         {/* Order Summary Section */}
         <div className="order-summary">
