@@ -62,7 +62,7 @@ const NavBar = () => {
       <nav className={`bg-white text-green-950 shadow-md fixed top-0 w-full z-[50] px-4 sm:px-8 transition-all duration-300 h-[70px] ${isScrolled ? 'hidden' : 'flex'} justify-between items-center`}>
         {/* Logo */}
         <Link to="/" className="flex items-center max-w-[200px] h-full">
-          <img src={logo} alt="TPizza Logo" className="h-full w-auto object-contain" />
+          <img src={"logo2.img"} alt="TPizza Logo" className="h-full w-auto object-contain" />
         </Link>
         {/* Desktop Nav */}
         <div className="hidden md:flex h-full font-semibold text-lg items-center">
