@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { cancelOrderGate, getOrdersByUserGate } from "../../routes/APIGates";
 import { Loader2, CalendarDays, CreditCard, ShoppingCart } from "lucide-react";
-import { ORDER_STATUS_VN, PAYMENT_METHOD } from "../../constants";
+import { ORDER_STATUS_VN, ORDER_STATUS_COLOR_MAP, PAYMENT_METHOD } from "../../constants";
 
 export const TabTransaction = () => {
   const { user } = useAuth();
@@ -55,16 +55,9 @@ export const TabTransaction = () => {
     );
 
   const renderStatusBadge = (status) => {
-    const colorMap = {
-      processing: "bg-blue-100 text-blue-800",
-      cooking: "bg-orange-100 text-orange-800",
-      ongoing: "bg-yellow-100 text-yellow-800",
-      accomplished: "bg-green-100 text-green-800",
-      cancelled: "bg-red-100 text-red-800",
-    };
     return (
       <span
-        className={`text-xs px-3 py-1 rounded-full shadow-sm font-semibold ${colorMap[status] || "bg-gray-100 text-gray-800"}`}
+        className={`text-xs px-3 py-1 rounded-full shadow-sm font-semibold ${ORDER_STATUS_COLOR_MAP[status] || "bg-gray-100 text-gray-800"}`}
       >
         {ORDER_STATUS_VN[status]}
       </span>

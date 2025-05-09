@@ -32,10 +32,10 @@ export const AuthProvider = ({ children }) => {
   const getUserById = async (userId) => {
     try {
       const res = await api.get(getUserByIdGate(userId), { withCredentials: true });
-      return res.data; // Assuming the response returns user data
+      return res.data;
     } catch (err) {
       console.error("Error fetching user by ID:", err);
-      return null; // Return null in case of error
+      return null;
     }
   };
 

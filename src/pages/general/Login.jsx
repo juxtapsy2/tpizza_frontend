@@ -26,10 +26,8 @@ const Login = () => {
       return toast.error("Vui lòng điền đầy đủ thông tin.");
     }
   
-    if (EMAIL_REGEX.test(formData.identifier)) {
-      // valid email
-    } else if (USERNAME_REGEX.test(formData.identifier)) {
-      // valid username
+    if (EMAIL_REGEX.test(formData.identifier) || USERNAME_REGEX.test(formData.identifier)) {
+      // valid username/email
     } else {
       return toast.error("Vui lòng nhập email/tên đăng nhập hợp lệ.");
     }

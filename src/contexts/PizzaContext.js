@@ -6,22 +6,21 @@ const PizzaContext = createContext();
 
 export const PizzaProvider = ({ children }) => {
   const [pizzas, setPizzas] = useState([]);
+  const fetchPizzas = async () => {
+    try {
+      const res = await api.get(getAllPizzasGate);
+      setPizzas(res.data);
+    } catch (err) {
+      console.error("Failed to fetch pizzas:", err);
+    }
+  };
 
   useEffect(() => {
-    const fetchPizzas = async () => {
-      try {
-        const res = await api.get(getAllPizzasGate);
-        setPizzas(res.data);
-      } catch (err) {
-        console.error("Failed to fetch pizzas:", err);
-      }
-    };
-
     fetchPizzas();
   }, []);
 
   return (
-    <PizzaContext.Provider value={{ pizzas }}>
+    <PizzaContext.Provider value={{ pizzas, fetchPizzas }}>
       {children}
     </PizzaContext.Provider>
   );

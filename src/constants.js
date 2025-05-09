@@ -37,11 +37,12 @@ export const MENU_ITEMS_BY_ROLE = {
 };
 
 export const ADMIN_NAV_ITEMS = [
-  { label: 'Thống kê', path: '/admin', icon: BarChart },
-  { label: 'Quản lý người dùng', path: '/admin/manage-user', icon: Users },
-  { label: 'Quản lý đơn hàng', path: '/admin/manage-order', icon: Receipt },
-  { label: 'Quản lý menu', path: '/admin/manage-menu', icon: Pizza },
+  { path: 'dashboard', label: 'Dashboard', icon: BarChart },
+  { path: 'manage-order', label: 'Đơn hàng', icon: Receipt },
+  { path: 'manage-user', label: 'Người dùng', icon: Users },
+  { path: 'manage-menu', label: 'Thực đơn', icon: Pizza },
 ];
+
 
 // Default pre-defined classes for filter
 export const PIZZA_CLASSES = [
@@ -69,7 +70,7 @@ export const PIZZA_CLASSES = [
 ];
 
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-export const USERNAME_REGEX = /^[a-zA-Z0-9_]+$/;
+export const USERNAME_REGEX = /^[a-zA-Z0-9._]+$/;
 export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-])[A-Za-z\d!@#$%^&*()_+={}\[\]:;"'<>,.?/-]{8,}$/;
 
 export const PROFILE_TABS = [
@@ -134,6 +135,13 @@ export const ORDER_STATUS_VN = {
   accomplished: "Hoàn tất",
   cancelled: "Đã hủy", 
 }
+export const ORDER_STATUS_COLOR_MAP = {
+  processing: "bg-blue-100 text-blue-800",
+  cooking: "bg-orange-100 text-orange-800",
+  ongoing: "bg-yellow-100 text-yellow-800",
+  accomplished: "bg-green-600 text-green-50",
+  cancelled: "bg-red-100 text-red-800",
+};
 
 export const PAYMENT_METHOD = {
   cod: "Thanh toán khi nhận hàng",
